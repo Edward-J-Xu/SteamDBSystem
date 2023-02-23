@@ -1,9 +1,9 @@
+import "./postApp.css";
 import React, { useEffect, useState } from "react"
-import "./gamePosts.css"
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom"
 
-const GamePosts = () => {
+const PostApp = () => {
     const [listOfPosts, setListOfPosts] = useState([]);
 
     useEffect(() => {
@@ -12,7 +12,9 @@ const GamePosts = () => {
         });
     }, []);
     return (
-        <div className="gamePosts">
+        <div className="PostApp">
+            <Link to="/games/posts/createpost" style={{textDecoration: "none"}}><span>Create A Post</span></Link>
+            <Link to="/games/posts" style={{textDecoration: "none"}}><span>Posts Home Page</span></Link>
             {listOfPosts.map((value, key) => {
                 return (
                     <div className="post">
@@ -20,10 +22,15 @@ const GamePosts = () => {
                         <div className="body">{value.postText}</div>
                         <div className="footer">{value.username}</div>
                     </div>
+                    // <div className="/games/posts/post">
+                    //     <div className="title"> {value.title} </div>
+                    //     <div className="body">{value.postText}</div>
+                    //     <div className="footer">{value.username}</div>
+                    // </div>
                 );
             })}
         </div>
     );
 }
 
-export default GamePosts
+export default PostApp;
