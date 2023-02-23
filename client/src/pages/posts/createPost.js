@@ -3,9 +3,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "./createPost.css"
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from "react-router-dom";
 
 function CreatePost() {
+    let history = useNavigate();
     const initialValues = {
         title: "",
         postText: "",
@@ -20,12 +21,13 @@ function CreatePost() {
 
     const onSubmit = (data) => {
         axios.post("http://localhost:3001/posts", data).then((response) => {
-            console.log("IT WORKED");
+            history.push("/");
         });
     };
+    
     return (
         <div className="createPostPage">
-            <div className="postLink">
+            <div className="navbar">
                 <Link to="/games/posts/createpost" style={{ textDecoration: "none" }}><span>Create A Post</span></Link>
                 <Link to="/games/posts" style={{ textDecoration: "none" }}><span>Posts Home Page</span></Link>
             </div>

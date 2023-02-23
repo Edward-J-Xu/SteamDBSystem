@@ -1,3 +1,15 @@
+.createPostPage {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
 
 /* CREATE POST PAGE CSS */
 
@@ -47,4 +59,57 @@
 
 span {
   color: red;
+}
+
+/* NAVBAR */
+
+.navbar {
+  width: 36%;
+  height: 20px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+/* INDIVIDUAL POST */
+.postPage {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.leftSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+}
+
+.rightSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+}
+
+#individual {
+  height: 500px;
+  width: 600px;
+}
+
+#individual .title,
+#individual .footer {
+  font-size: 30px;
+}
+
+#individual .body {
+  font-size: 25px;
 }
