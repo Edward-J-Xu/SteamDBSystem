@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const post = req.body;
+  // Create / Insert Posts
   await Posts.create(post);
   res.json(post);
 });
