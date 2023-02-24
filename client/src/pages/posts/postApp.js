@@ -25,6 +25,7 @@ const PostApp = () => {
                 }
                 return (
                     <div
+                        key={key}
                         className="post"
                         // onClick={() => {
                         //     history.push(`/games/posts/${value.id}`);

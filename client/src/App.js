@@ -7,6 +7,8 @@ import Game from './pages/gameDetail/game';
 import PostApp from './pages/posts/postApp';
 import CreatePost from "./pages/posts/createPost";
 import Post from "./pages/posts/Post";
+import Login from "./pages/LoginRegister/Login";
+import Registration from "./pages/LoginRegister/Registration";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
                 <Route path="games/posts"  element={<PostApp />}></Route>
                 <Route path="games/posts/:id"  element={<Post />}></Route>
                 <Route path="games/posts/createpost"  element={<CreatePost />}></Route>
+                <Route path="login"  element={<Login />}></Route>
+                <Route path="registration"  element={<Registration />}></Route>
                 <Route path="/*" element={<h1>Error Page</h1>}></Route>
             </Routes>
         </Router>
