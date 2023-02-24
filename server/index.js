@@ -15,8 +15,19 @@ app.use("/comments", commentsRouter);
 const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
 
-db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
-    console.log("Server running on port 3001");
-  });
-});
+
+app.use((error, req, res, next) => {
+  res.status(error.code || 500)
+  res.json({message: error.message || 'An unknown error occerred!'})
+
+})
+
+app.listen(3001, () => {
+  console.log("Server is running on port 3001")
+})
+
+// db.sequelize.sync().then(() => {
+//   app.listen(3001, () => {
+//     console.log("Server running on port 3001");
+//   });
+// });
