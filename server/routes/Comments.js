@@ -8,19 +8,24 @@ router.get("/:postId", async (req, res) => {
   const postId = req.params.postId;
   // const comments = await Comments.findAll({ where: { PostId: postId } });
   const comments = await db.pool.query(
-      "select * from comments where post_id = (?)",
+      "select comment_body as commentBody, post_id as postID from comments where post_id = (?)",
       [postId]
   )
+  console.log("comments: ", comments[0])
   res.json(comments[0]);
 });
 
 // Insert
 router.post("/", async (req, res) => {
-  const {comment, postId} = req.body;
-  // await Comments.create(comment);
+  console.log("req.body: ", req.body)
+  // console.log("res.json: ", JSON.stringify(req.body))
+  const comment = req.body;
+  console.log("comment: ", comment.commentBody)
+  console.log("postId: ", comment.postId)
+  // // await Comments.create(comment);
   db.pool.query(
       "insert into comments (comment_body, post_id) values (?, ?)",
-      [comment, postId]
+      [comment.commentBody, comment.postId]
   )
   res.json(comment);
 });

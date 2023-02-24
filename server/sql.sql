@@ -19,6 +19,6 @@ create table if not exists comments
 (
     id           int primary key auto_increment,
     comment_body varchar(500) not null,
-    post_id  int unique not null,
+    post_id  int not null,
     constraint fk_post_id foreign key (post_id) references posts (id) on delete cascade
 );
