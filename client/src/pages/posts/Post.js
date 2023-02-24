@@ -26,7 +26,7 @@ function Post() {
         axios
             .post("http://localhost:3001/comments", {
                 commentBody: newComment,
-                PostId: id,
+                postId: id,
             })
             .then((response) => {
                 const commentToAdd = { commentBody: newComment };
