@@ -24,9 +24,12 @@ router.post("/", validateToken, async (req, res) => {
     console.log("comment: ", comment.commentBody);
     console.log("postId: ", comment.postId);
     // // await Comments.create(comment);
+    const username = req.user.username;
+    comment.username = username
+    console.log("User: ", username);
     db.pool.query(
-        "insert into comments (comment_body, post_id) values (?, ?)",
-        [comment.commentBody, comment.postId]
+        "insert into comments (comment_body, post_id, username) values (?, ?, ?)",
+        [comment.commentBody, comment.postId, comment.username]
     );
     res.json(comment);
 });
