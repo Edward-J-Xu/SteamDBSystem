@@ -21,7 +21,7 @@ function Registration() {
         axios.post("http://localhost:3001/auth", data).then(() => {
             console.log(data);
         });
-        history("/");
+        history("/login");
     };
 
     return (
