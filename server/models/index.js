@@ -53,7 +53,7 @@ db.pool = pool.promise();
 //     .then(rev => console.log(rev))
 //     .catch(err => console.log(err));
 
-let dataSql = fs.readFileSync(path.join(__dirname, "../sql.sql")).toString();
+let dataSql = fs.readFileSync(path.join(__dirname, "../createTable.sql")).toString();
 dataSql = dataSql.replace(/(\r\n|\n|\r)/gm, "");
 dataSql.split(";").forEach((sql) => {
   console.log("sql: ", sql)
