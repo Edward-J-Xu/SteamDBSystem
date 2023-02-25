@@ -24,22 +24,41 @@ function Post() {
 
     const addComment = () => {
         axios
-            .post("http://localhost:3001/comments", {
-                commentBody: newComment,
-                postId: id,
-            })
+            .post(
+                "http://localhost:3001/comments",
+                {
+                    commentBody: newComment,
+                    postId: id,
+                },
+                {
+                    headers: {
+                        accessToken: sessionStorage.getItem("accessToken"),
+                    },
+                }
+            )
             .then((response) => {
-                const commentToAdd = { commentBody: newComment };
-                setComments([...comments, commentToAdd]);
-                setNewComment("");
+                if (response.data.error) {
+                    console.log(response.data.error);
+                } else {
+                    const commentToAdd = { commentBody: newComment };
+                    setComments([...comments, commentToAdd]);
+                    setNewComment("");
+                }
             });
     };
 
     return (
         <div className="postPage">
             <div className="navbar1">
-                <Link to="/games/posts/createpost" style={{ textDecoration: "none" }}><span>Create A Post</span></Link>
-                <Link to="/games/posts" style={{ textDecoration: "none" }}><span>Posts Home Page</span></Link>
+                <Link
+                    to="/games/posts/createpost"
+                    style={{ textDecoration: "none" }}
+                >
+                    <span>Create A Post</span>
+                </Link>
+                <Link to="/games/posts" style={{ textDecoration: "none" }}>
+                    <span>Posts Home Page</span>
+                </Link>
             </div>
             <div className="leftSide">
                 <div className="post" id="individual">

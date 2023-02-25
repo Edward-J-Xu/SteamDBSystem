@@ -10,9 +10,9 @@ create table if not exists posts
 
 create table if not exists users
 (
+    id       int primary key auto_increment,
     username varchar(15) unique not null,
-    password varchar(60) not null,
-    primary key (username)
+    password varchar(60) not null
 );
 
 create table if not exists comments
