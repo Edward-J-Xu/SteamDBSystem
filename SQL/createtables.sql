@@ -15,8 +15,8 @@ create table friend
     follower int not null,
     followee int not null,
     primary key(follower, followee),
-    foreign key(follower) references user(ID),
-    foreign key(followee) references user(ID)
+    foreign key(follower) references user,
+    foreign key(followee) references user
 );
 
 create table game
@@ -27,48 +27,48 @@ create table game
     language varchar(30) not null,
     platform varchar(30) not null,
     developer varchar(30) not null,
-    rating numeric(2, 1),
     release_year smallint not null,
     release_month smallint not null,
     release_day smallint not null,
+    rating numeric(2, 1),
     current_price int not null check(current_price >= 0),
     game_image varchar(2048)
 );
 
 create table wishlist
 (
-    uid int not null,
+    usename int not null,
     gid int not null,
     desire_rating numeric(2, 0) not null,
-    primary key(uid, gid),
-    foreign key(uid) references user,
+    primary key(usename, gid),
+    foreign key(usename) references user,
     foreign key(gid) references game
 );
 
 create table own
 (
-    uid int not null,
+    usename int not null,
     gid int not null,
-    primary key(uid, gid),
-    foreign key(uid) references user,
+    primary key(usename, gid),
+    foreign key(usename) references user,
     foreign key(gid) references game
 );
 
 create table review
 (
-    uid int not null,
+    usename int not null,
     gid int not null,
     star_rating numeric(2,1) not null,
-    primary key(uid, gid),
-    foreign key(uid) references user,
+    primary key(usename, gid),
+    foreign key(usename) references user,
     foreign key(gid) references game
 );
 
 create table comment
 (
-    uid int not null,
+    usename int not null,
     gid int not null,
     comment_id int not null,
     comment_body varchar(512),
-    (uid, gid) references review
+    (usename, gid) references review
 );
