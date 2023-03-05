@@ -64,14 +64,16 @@ order by rating desc;
 insert into review(username, gid, star_rating)
 values ('bob6', 111, 4.5);
 
-/*create trigger update_rating after insert on review
+create trigger update_rating after insert on review
 referencing new row as nrow
 for each row
 begin
    update game
    set rating = (
-      
+      select avg(star_rating) as rating
+      from review
+      group by review.gid
+      where review.gid = nrow.gid
    )
    where game_id = nrow.gid
 end;
-*/
