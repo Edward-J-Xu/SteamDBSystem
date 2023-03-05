@@ -4,9 +4,9 @@ drop table wishlist;
 
 drop table own;
 
-drop table review;
-
 drop table comment;
+
+drop table review;
 
 drop table userA;
 

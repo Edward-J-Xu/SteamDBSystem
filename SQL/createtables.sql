@@ -69,8 +69,8 @@ create table comment
     username varchar(15) not null,
     gid int not null,
     comment_id int not null,
-    primary key(username, gid, comment_id),
     comment_body varchar(512),
+    primary key(username, gid, comment_id),
     foreign key(username, gid) references review
 );
 
