@@ -77,3 +77,9 @@ begin
    )
    where game_id = nrow.gid
 end;
+
+/* Feature: Create comment
+   Example: user bob6 comments game 111 with "This game is fun!"
+*/
+insert into game(username, gid, comment_body)
+values ('bob6', 111, 'This game is fun!');
