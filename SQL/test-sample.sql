@@ -10,7 +10,7 @@ values ('bob6', '123456');
 */
 select ID, username
 from user
-where username = 'bob6', password = '123456'
+where username = 'bob6', password = '123456';
 
 
 /* Feature: Fill profile information
@@ -21,26 +21,31 @@ set age = 21
 where username = 'bob6'
 update user
 set language = 'Mandarin'
-where username = 'bob6'
+where username = 'bob6';
 
 
 /* Feature: Buy/own game, remove from wishlist if so
-   Example: user with ID 1001 bought a game with ID 22222
+   Example: user 'bob6' bought a game with ID 22222
 */
-insert into owns
-values (1001, 22222);
-delete from wishes
-where user_id = 1001 and game_id = 22222;
+insert into own
+values ('bob6', 22222);
 
+create trigger delete_from_wishlist after insert into own
+referencing new row as nrow
+for each row
+begin
+   delete from wishlist
+   where username = nrow.username and game_id = nrow.game_id;
+end;
 
 /* Feature: Look up all games the user own
-   Example: user with ID 1001 looks up his own list, 
+   Example: user bob6 looks up his own list, 
             and shows all games' name, image, genre, language, rating
 */
 select name, game_image, genre, language, rating
-from wishes, game
-where wishes.game_id = game.ID
-and wishes.user_id = 1001;
+from own, game
+where wishes.game_id = game.game_id
+and wishes.usename = 'bob6';
 
 
 /* Feature: Search game by name, sort by rating by default
