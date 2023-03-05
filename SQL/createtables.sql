@@ -59,6 +59,7 @@ create table review
     username varchar(15) not null,
     gid int not null,
     star_rating numeric(2,1) not null,
+    review_body varchar(512),
     primary key(username, gid),
     foreign key(username) references userA(username),
     foreign key(gid) references game(game_id)
