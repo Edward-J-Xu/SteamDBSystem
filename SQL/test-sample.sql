@@ -25,12 +25,12 @@ where username = 'bob6';
 
 
 /* Feature: Buy/own game, remove from wishlist if so
-   Example: user 'bob6' bought a game with ID 22222
+   Example: user 'bob6' bought a game with ID 111
 */
 insert into own
-values ('bob6', 22222);
+values ('bob6', 111);
 
-create trigger delete_from_wishlist after insert into own
+create trigger delete_from_wishlist after insert on own
 referencing new row as nrow
 for each row
 begin
@@ -48,10 +48,30 @@ where wishes.game_id = game.game_id
 and wishes.usename = 'bob6';
 
 
-/* Feature: Search game by name, sort by rating by default
-   Example: searching "horizon"
+/* Feature: Search game by name, sort by rating by default, and use filter
+   Example: searching "car", and then select language 'Finnish'
 */
 select name, game_image, genre, language, rating
 from game 
-where name like '%horizon%'
-order by rating desc
+where name like '%car%'
+and language = 'Finnish'
+order by rating desc;
+
+
+/* Feature: Create review, and update the game rating automatically
+   Example: user bob6 reviews game 111 with 4.5 stars
+*/
+insert into review(username, gid, star_rating)
+values ('bob6', 111, 4.5);
+
+/*create trigger update_rating after insert on review
+referencing new row as nrow
+for each row
+begin
+   update game
+   set rating = (
+      
+   )
+   where game_id = nrow.gid
+end;
+*/
