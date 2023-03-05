@@ -27,9 +27,6 @@ where username = 'bob6';
 /* Feature: Buy/own game, remove from wishlist if so
    Example: user 'bob6' bought a game with ID 111
 */
-insert into own
-values ('bob6', 111);
-
 create trigger delete_from_wishlist after insert on own
 referencing new row as nrow
 for each row
@@ -37,6 +34,9 @@ begin
    delete from wishlist
    where username = nrow.username and game_id = nrow.game_id;
 end;
+
+insert into own
+values ('bob6', 111);
 
 /* Feature: Look up all games the user own
    Example: user bob6 looks up his own list, 
@@ -61,9 +61,6 @@ order by rating desc;
 /* Feature: Create review, and update the game rating automatically
    Example: user bob6 reviews game 111 with 4.5 stars
 */
-insert into review(username, gid, star_rating)
-values ('bob6', 111, 4.5);
-
 create trigger update_rating after insert on review
 referencing new row as nrow
 for each row
@@ -77,6 +74,9 @@ begin
    )
    where game_id = nrow.gid
 end;
+
+insert into review(username, gid, star_rating)
+values ('bob6', 111, 4.5);
 
 /* Feature: Create comment
    Example: user bob6 comments game 111 with "This game is fun!"
