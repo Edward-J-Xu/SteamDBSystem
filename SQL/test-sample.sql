@@ -50,7 +50,7 @@ order by rating desc;
 /* Feature: Create review
 */
 insert into review(username, gid, star_rating, review_body)
-values ('bob6', 112, 4.5 , "not bad");
+values ('bob6', 112, 4.5 , 'not bad');
 select * from review where username = 'bob6';
 select * from game where game_id = 112;
 
