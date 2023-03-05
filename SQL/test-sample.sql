@@ -36,9 +36,10 @@ select * from userA where username = 'bob6';
 -- end
 -- go
 
+
 -- insert a record into the 'own' table to activate the trigger
 insert into own
-values ('bob6', 111);
+values ('bob6', 112);
 select * from own where username = 'bob6';
 
 /* Feature: Look up all games the user own
@@ -77,13 +78,13 @@ order by rating desc;
 -- end;
 
 insert into review(username, gid, star_rating)
-values ('bob6', 111, 4.5);
+values ('bob6', 112, 4.5);
 select * from review where username = 'bob6';
-select * from game where game_id = 111;
+select * from game where game_id = 112;
 
 /* Feature: Create comment
    Example: user bob6 comments game 111 with "This game is fun!"
 */
-insert into comment(username, gid, comment_id, comment_body)
-values ('bob6', 111, 10, 'This game is fun!');
-select * from comment where username = 'bob6' and gid = 111;
+insert into comment(username, gid, comment_id, commenter, comment_body)
+values ('bob6', 112, 10, 'bob6', 'This game is fun!');
+select * from comment where username = 'bob6' and gid = 112;
