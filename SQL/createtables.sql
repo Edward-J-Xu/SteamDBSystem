@@ -1,9 +1,9 @@
-create table user 
+create table userA
 (
     username varchar(15) primary key not null,
     name varchar(30),
     password varchar(60) not null,
-    region varchar(30)
+    region varchar(30),
     age numeric(2, 0) check(age >= 0),
     language varchar(30),
     platform varchar(30),
@@ -12,16 +12,16 @@ create table user
 
 create table friend
 (
-    follower int not null,
-    followee int not null,
+    follower varchar(15) not null,
+    followee varchar(15) not null,
     primary key(follower, followee),
-    foreign key(follower) references user,
-    foreign key(followee) references user
+    foreign key(follower) references userA,
+    foreign key(followee) references userA
 );
 
 create table game
 (
-    game_id int not null primary key auto_increment,
+    game_id int not null primary key,
     name varchar(60) unique not null,
     genre varchar(30) not null,
     language varchar(30) not null,
@@ -37,38 +37,41 @@ create table game
 
 create table wishlist
 (
-    usename int not null,
+    username varchar(15) not null,
     gid int not null,
     desire_rating numeric(2, 0) not null,
-    primary key(usename, gid),
-    foreign key(usename) references user,
+    primary key(username, gid),
+    foreign key(username) references userA,
     foreign key(gid) references game
 );
 
 create table own
 (
-    usename int not null,
+    username varchar(15) not null,
     gid int not null,
-    primary key(usename, gid),
-    foreign key(usename) references user,
+    primary key(username, gid),
+    foreign key(username) references userA,
     foreign key(gid) references game
 );
 
 create table review
 (
-    usename int not null,
+    username varchar(15) not null,
     gid int not null,
     star_rating numeric(2,1) not null,
-    primary key(usename, gid),
-    foreign key(usename) references user,
+    primary key(username, gid),
+    foreign key(username) references userA,
     foreign key(gid) references game
 );
 
 create table comment
 (
-    usename int not null,
+    username varchar(15) not null,
     gid int not null,
-    comment_id int primary key not null auto_increment,
+    comment_id int not null,
+    primary key(username, gid, comment_id),
     comment_body varchar(512),
-    foreign key(usename, gid) references review
+    foreign key(username, gid) references review
 );
+
+
