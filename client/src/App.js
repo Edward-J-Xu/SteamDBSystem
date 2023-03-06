@@ -16,7 +16,9 @@ function App() {
         <Router>
           <Header />
             <Routes>
-                <Route index element={<Home />}></Route>
+                {/* <Route index element={<Home />}></Route> */}
+                {/* Milestone 1 */}
+                <Route index element={<Login />}></Route>
                 <Route path="game/:id" element={<Game />}></Route>
                 <Route path="games/:type" element={<GameList />}></Route>
                 <Route path="games/posts"  element={<PostApp />}></Route>

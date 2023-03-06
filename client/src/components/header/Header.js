@@ -34,7 +34,8 @@ const Header = () => {
                             src="https://cdn-icons-png.flaticon.com/512/220/220223.png"
                         />
                     </Link>
-                    <Link
+                    {/* Milestone 1 */}
+                    {/* <Link
                         to="/games/popular"
                         style={{ textDecoration: "none" }}
                     >
@@ -51,7 +52,7 @@ const Header = () => {
                         style={{ textDecoration: "none" }}
                     >
                         <span>Upcoming</span>
-                    </Link>
+                    </Link> */}
                     <Link to="/games/posts" style={{ textDecoration: "none" }}>
                         <span>Posts</span>
                     </Link>
