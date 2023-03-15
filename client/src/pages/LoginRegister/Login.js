@@ -19,11 +19,15 @@ function Login() {
                     alert(response.data.error);
                     history("/registration");
                 } else {
-                    localStorage.setItem("accessToken", response.data);
-                    setAuthState(true);
+                    localStorage.setItem("accessToken", response.data.token);
+                    setAuthState({
+                        username: response.data.username,
+                        id: response.data.id,
+                        status: true,
+                    });
                 }
             });
-            history("/games/posts");
+        history("/games/posts");
     };
     return (
         <div className="loginContainer">
