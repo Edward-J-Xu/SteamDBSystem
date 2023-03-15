@@ -27,7 +27,7 @@ router.post("/", validateToken, async (req, res) => {
     const username = req.user.username;
     comment.username = username;
     console.log("User: ", username);
-    db.pool.query(
+    await db.pool.query(
         "insert into comments (comment_body, post_id, username) values (?, ?, ?)",
         [comment.comment_body, comment.postId, comment.username]
     );
@@ -44,7 +44,7 @@ router.delete("/:commentId", validateToken, async (req, res) => {
     // });
     console.log("CommentID: ", commentId);
     if (commentId != "undefined") {
-        db.pool.query("delete from comments where id =  (?)", [commentId]);
+        await db.pool.query("delete from comments where id =  (?)", [commentId]);
 
         res.json("DELETED SUCCESSFULLY");
     }

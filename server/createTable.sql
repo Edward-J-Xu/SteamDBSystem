@@ -23,3 +23,12 @@ create table if not exists comments
     username     varchar(15) not null,
     constraint   fk_post_id foreign key (post_id) references posts (id) on delete cascade
 );
+
+create table if not exists likes
+(
+    id           int primary key auto_increment,
+    post_id      int not null,
+    user_id      int not null,
+    constraint   like_post_id foreign key (post_id) references posts (id) on delete cascade,
+    constraint   like_user_id foreign key (user_id) references users (id) on delete cascade
+);
