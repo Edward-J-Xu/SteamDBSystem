@@ -7,7 +7,7 @@ const db = require("../models/index")
 router.get("/", async (req, res) => {
   // const listOfPosts = await Posts.findAll();
   const [listOfPosts, filedData] = await db.pool.query(
-      "select * from posts"
+      "select posts.*, json_arrayagg(json_object('id', l.id, 'userID', l.user_id)) Likes from posts left join likes as l on posts.id = l.post_id group by posts.id"
   )
   console.log("lists of posts: ", JSON.stringify(listOfPosts))
   res.json(listOfPosts);

@@ -25,9 +25,9 @@ router.post("/", validateToken, async (req, res) => {
     console.log("postId: ", comment.postId);
     // // await Comments.create(comment);
     const username = req.user.username;
-    comment.username = username
+    comment.username = username;
     console.log("User: ", username);
-    db.pool.query(
+    await db.pool.query(
         "insert into comments (comment_body, post_id, username) values (?, ?, ?)",
         [comment.comment_body, comment.postId, comment.username]
     );
@@ -36,19 +36,18 @@ router.post("/", validateToken, async (req, res) => {
 
 router.delete("/:commentId", validateToken, async (req, res) => {
     const commentId = req.params.commentId;
-  
+
     // await Comments.destroy({
     //   where: {
     //     id: commentId,
     //   },
     // });
     console.log("CommentID: ", commentId);
-    db.pool.query(
-        "delete from comments where id =  (?)",
-        [commentId]
-    );
-  
-    res.json("DELETED SUCCESSFULLY");
-  });
+    if (commentId != "undefined") {
+        await db.pool.query("delete from comments where id =  (?)", [commentId]);
+
+        res.json("DELETED SUCCESSFULLY");
+    }
+});
 
 module.exports = router;
