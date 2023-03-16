@@ -2,15 +2,23 @@ const express = require("express");
 const router = express.Router();
 const { Posts } = require("../models");
 const db = require("../models/index")
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
 // Select
-router.get("/", async (req, res) => {
+router.get("/", validateToken, async (req, res) => {
   // const listOfPosts = await Posts.findAll();
   const [listOfPosts, filedData] = await db.pool.query(
       "select posts.*, json_arrayagg(json_object('id', l.id, 'userID', l.user_id)) Likes from posts left join likes as l on posts.id = l.post_id group by posts.id"
   )
+
+  const [likedPosts, likedData] = await db.pool.query(
+    "select * from likes where user_id = (?)",
+    [req.user.id]
+)
   console.log("lists of posts: ", JSON.stringify(listOfPosts))
-  res.json(listOfPosts);
+  console.log("liked posts: ", JSON.stringify(likedPosts))
+  // res.json(listOfPosts);
+  res.json({ listOfPosts: listOfPosts, likedPosts: likedPosts });
 });
 
 // Select

@@ -14,6 +14,7 @@ import { AuthContext } from "./helpers/AuthContext";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
     const [authState, setAuthState] = useState({
@@ -134,7 +135,7 @@ function App() {
                         path="registration"
                         element={<Registration />}
                     ></Route>
-                    <Route path="/*" element={<h1>Error Page</h1>}></Route>
+                    <Route path="/*" element={<PageNotFound />}></Route>
                 </Routes>
             </Router>
         </div>
