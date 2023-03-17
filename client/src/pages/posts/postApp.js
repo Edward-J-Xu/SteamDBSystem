@@ -8,15 +8,26 @@ import {
     useNavigate,
 } from "react-router-dom";
 import axios from "axios";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 
 const PostApp = () => {
     let history = useNavigate();
     const [listOfPosts, setListOfPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/posts").then((response) => {
-            setListOfPosts(response.data);
-        });
+        axios
+            .get("http://localhost:3001/posts", {
+                headers: { accessToken: localStorage.getItem("accessToken") },
+            })
+            .then((response) => {
+                setListOfPosts(response.data.listOfPosts);
+                setLikedPosts(
+                    response.data.likedPosts.map((like) => {
+                        return like.PostId;
+                    })
+                );
+            });
     }, []);
 
     const likeAPost = (postId) => {
@@ -33,9 +44,11 @@ const PostApp = () => {
             .then((response) => {
                 setListOfPosts(
                     listOfPosts.map((post) => {
-                        // while (post.Likes.length != 0 && post.Likes[0].id == null) {
-                        //     post.Likes.pop();
-                        // }
+                        if (post.Likes[0].id == null) {
+                            console.log(post.Likes.length);
+                            post.Likes.pop();
+                            console.log(post.Likes.length);
+                        }
                         if (post.id === postId) {
                             if (response.data.liked) {
                                 return { ...post, Likes: [...post.Likes, 0] };
@@ -49,6 +62,15 @@ const PostApp = () => {
                         }
                     })
                 );
+                if (likedPosts.includes(postId)) {
+                    setLikedPosts(
+                        likedPosts.filter((id) => {
+                            return id != postId;
+                        })
+                    );
+                } else {
+                    setLikedPosts([...likedPosts, postId]);
+                }
             });
     };
 
@@ -76,19 +98,21 @@ const PostApp = () => {
                             {value.postText}
                         </div>
                         <div className="footer">
-                            {value.username}{" "}
-                            <button
-                                onClick={() => {
-                                    likeAPost(value.id);
-                                }}
-                            >
-                                {" "}
-                                Like
-                            </button>
-                            {/* {console.log("Liked[0]: ", value.Likes[0].id)} */}
-                            <label> 
-                                {value.Likes.length}
-                            </label>
+                            <div className="username">{value.username}</div>
+                            <div className="buttons">
+                                <ThumbUpAltIcon
+                                    onClick={() => {
+                                        likeAPost(value.id);
+                                    }}
+                                    className={
+                                        likedPosts.includes(value.id)
+                                            ? "unlikeBttn"
+                                            : "likeBttn"
+                                    }
+                                />
+                                {/* {console.log("Liked[0]: ", value.Likes[0].id)} */}
+                                <label>{value.Likes.length}</label>
+                            </div>
                         </div>
                     </div>
                 );
