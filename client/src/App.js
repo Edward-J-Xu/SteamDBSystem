@@ -61,32 +61,8 @@ function App() {
                                     src="https://cdn-icons-png.flaticon.com/512/220/220223.png"
                                 />
                             </Link>
-                            {/* Milestone 1 */}
-                            {/* <Link
-                        to="/games/popular"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <span>Popular</span>
-                    </Link>
-                    <Link
-                        to="/games/top_rated"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <span>Top Rated</span>
-                    </Link>
-                    <Link
-                        to="/games/upcoming"
-                        style={{ textDecoration: "none" }}
-                    >
-                        <span>Upcoming</span>
-                    </Link> */}
-                            <Link
-                                to="/games/posts"
-                                style={{ textDecoration: "none" }}
-                            >
-                                <span>Posts</span>
-                            </Link>
-                            {!authState.status && (
+
+                            {!authState.status ? (
                                 <>
                                     <Link
                                         to="/login"
@@ -99,6 +75,34 @@ function App() {
                                         style={{ textDecoration: "none" }}
                                     >
                                         <span>Registration</span>
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    {/* Milestone 1 */}
+                                    <Link
+                                        to="/games/popular"
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <span>Popular</span>
+                                    </Link>
+                                    <Link
+                                        to="/games/top_rated"
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <span>Top Rated</span>
+                                    </Link>
+                                    <Link
+                                        to="/games/upcoming"
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <span>Upcoming</span>
+                                    </Link>
+                                    <Link
+                                        to="/games/posts"
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <span>Posts</span>
                                     </Link>
                                 </>
                             )}
