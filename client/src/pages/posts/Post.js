@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
@@ -10,12 +10,13 @@ function Post() {
     const [postObject, setPostObject] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    // const { authState, setAuthState} = useContext(AuthContext);
-    const [authState, setAuthState] = useState({
-        username: "",
-        id: 0,
-        status: false,
-    });
+    const { authState, setAuthState } = useContext(AuthContext);
+    let history = useNavigate();
+    // const [authState, setAuthState] = useState({
+    //     username: "",
+    //     id: 0,
+    //     status: false,
+    // });
 
     useEffect(() => {
         axios
@@ -91,6 +92,16 @@ function Post() {
             });
     };
 
+    const deletePost = (id) => {
+        axios
+            .delete(`http://localhost:3001/posts/${id}`, {
+                headers: { accessToken: localStorage.getItem("accessToken") },
+            })
+            .then(() => {
+                history("/");
+            });
+    };
+
     return (
         <div className="postPage">
             <div className="navbar1">
@@ -108,7 +119,19 @@ function Post() {
                 <div className="post" id="individual">
                     <div className="title"> {postObject.title} </div>
                     <div className="body">{postObject.postText}</div>
-                    <div className="footer">{postObject.username}</div>
+                    <div className="footer">
+                        {postObject.username}
+                        {authState.username === postObject.username && (
+                            <button
+                                onClick={() => {
+                                    deletePost(postObject.id);
+                                }}
+                            >
+                                {" "}
+                                Delete Post
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="rightSide">
@@ -131,7 +154,7 @@ function Post() {
                                 {comment.comment_body}
                                 <label> Username: {comment.username}</label>
                                 {/* <AuthContext.Provider value={{ authState, setAuthState }}> */}
-                                    {/* {console.log("Auth User: ", authState.username)} */}
+                                {/* {console.log("Auth User: ", authState.username)} */}
                                 {/* <h1> Logged in: {authState.username} </h1> */}
                                 {authState.username === comment.username && (
                                     <button
