@@ -24,6 +24,7 @@ function CreatePost() {
     useEffect(() => {
         if (!localStorage.getItem("accessToken")) {
             history("/login");
+            console.log("1");
         }
     }, []);
 
@@ -38,7 +39,7 @@ function CreatePost() {
                 headers: { accessToken: localStorage.getItem("accessToken") },
             })
             .then((response) => {
-                history.push("/games/posts");
+                history("/games/posts");
             });
     };
 

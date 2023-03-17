@@ -1,5 +1,5 @@
 import "./postApp.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
     BrowserRouter as Router,
     Route,
@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import { AuthContext } from "../helpers/AuthContext";
+import { AuthContext } from "../../helpers/AuthContext";
 
 const PostApp = () => {
     let history = useNavigate();
@@ -18,8 +18,8 @@ const PostApp = () => {
     const { authState } = useContext(AuthContext);
 
     useEffect(() => {
-        if (!localStorage.getItem("accessToken")) {
-            history("/login");
+        if (! localStorage.getItem("accessToken")) {
+            // history("/login");
         } else {
             axios
                 .get("http://localhost:3001/posts", {

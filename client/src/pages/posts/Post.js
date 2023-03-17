@@ -10,13 +10,13 @@ function Post() {
     const [postObject, setPostObject] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const { authState, setAuthState } = useContext(AuthContext);
+    // const { authState } = useContext(AuthContext);
     let history = useNavigate();
-    // const [authState, setAuthState] = useState({
-    //     username: "",
-    //     id: 0,
-    //     status: false,
-    // });
+    const [authState, setAuthState] = useState({
+        username: "",
+        id: 0,
+        status: false,
+    });
 
     useEffect(() => {
         axios
@@ -98,7 +98,7 @@ function Post() {
                 headers: { accessToken: localStorage.getItem("accessToken") },
             })
             .then(() => {
-                history("/");
+                history("/games/posts");
             });
     };
 
