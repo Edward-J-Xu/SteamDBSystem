@@ -3,14 +3,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Profile() {
+    
   let { id } = useParams();
   let history = useNavigate();
   const [username, setUsername] = useState("");
   const [listOfPosts, setListOfPosts] = useState([]);
 
   useEffect(() => {
+    
     axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
-      setUsername(response.data.username);
+      setUsername(response.data[0][0].username);
     });
 
     axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
@@ -32,7 +34,7 @@ function Profile() {
               <div
                 className="body"
                 onClick={() => {
-                  history.push(`/post/${value.id}`);
+                  history(`/post/${value.id}`);
                 }}
               >
                 {value.postText}
@@ -40,7 +42,7 @@ function Profile() {
               <div className="footer">
                 <div className="username">{value.username}</div>
                 <div className="buttons">
-                  <label> {value.Likes.length}</label>
+                  <label> {value.likeCount}</label>
                 </div>
               </div>
             </div>

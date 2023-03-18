@@ -136,7 +136,7 @@ function App() {
                         element={<CreatePost />}
                     ></Route>
                     <Route path="login" element={<Login />}></Route>
-                    <Route path="/profile/:id" component={<Profile />} />
+                    <Route path="/profile/:id" element={<Profile />} />
                     <Route
                         path="registration"
                         element={<Registration />}
