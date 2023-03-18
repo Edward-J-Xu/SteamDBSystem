@@ -18,7 +18,7 @@ const PostApp = () => {
     const { authState } = useContext(AuthContext);
 
     useEffect(() => {
-        if (! localStorage.getItem("accessToken")) {
+        if (!localStorage.getItem("accessToken")) {
             // history("/login");
         } else {
             axios
@@ -106,7 +106,12 @@ const PostApp = () => {
                             {value.postText}
                         </div>
                         <div className="footer">
-                            <div className="username">{value.username}</div>
+                            <div className="username">
+                                <Link to={`/profile/${value.UserId}`}>
+                                    {" "}
+                                    {value.username}{" "}
+                                </Link>
+                            </div>
                             <div className="buttons">
                                 <ThumbUpAltIcon
                                     onClick={() => {
