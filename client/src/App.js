@@ -15,6 +15,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageNotFound from "./pages/PageNotFound";
+import Profile from "./pages/Profile";
 
 function App() {
     const [authState, setAuthState] = useState({
@@ -135,6 +136,7 @@ function App() {
                         element={<CreatePost />}
                     ></Route>
                     <Route path="login" element={<Login />}></Route>
+                    <Route path="/profile/:id" component={<Profile />} />
                     <Route
                         path="registration"
                         element={<Registration />}

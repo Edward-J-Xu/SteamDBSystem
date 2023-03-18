@@ -58,4 +58,15 @@ router.get("/auth", validateToken, (req, res) => {
     res.json(req.user);
 });
 
+router.get("/basicinfo/:id", async (req, res) => {
+    const id = req.params.id;
+
+    const basicInfo = await db.pool.query(
+        "select id, username from users where id = (?)",
+        [id]
+    );
+
+    res.json(basicInfo);
+});
+
 module.exports = router;

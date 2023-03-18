@@ -5,7 +5,8 @@ create table if not exists posts
     id          int primary key auto_increment,
     title       varchar(50)  not null,
     postText    varchar(500) not null,
-    username    varchar(15) not null
+    username    varchar(15) not null,
+    constraint   post_user foreign key (username) references users (username) on delete cascade
 );
 
 create table if not exists users
@@ -28,7 +29,7 @@ create table if not exists likes
 (
     id           int primary key auto_increment,
     post_id      int not null,
-    user_id      int not null,
+    username      int not null,
     constraint   like_post_id foreign key (post_id) references posts (id) on delete cascade,
-    constraint   like_user_id foreign key (user_id) references users (id) on delete cascade
+    constraint   like_username foreign key (username) references users (username) on delete cascade
 );

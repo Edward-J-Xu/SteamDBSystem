@@ -8,7 +8,7 @@ const { validateToken } = require("../middlewares/AuthMiddleware");
 router.get("/", validateToken, async (req, res) => {
     // const listOfPosts = await Posts.findAll();
     const [listOfPosts, filedData] = await db.pool.query(
-        "select posts.*, json_arrayagg(json_object('id', l.id, 'userID', l.user_id)) Likes from posts left join likes as l on posts.id = l.post_id group by posts.id"
+        "select posts.*, json_arrayagg(json_object('id', l.id, 'username', l.username)) Likes from posts left join likes as l on posts.id = l.post_id group by posts.id"
     );
 
     const [likedPosts, likedData] = await db.pool.query(
@@ -30,6 +30,14 @@ router.get("/byId/:id", async (req, res) => {
     ]);
     console.log("viewing a post: ", JSON.stringify(post[0]));
     res.json(post[0][0]);
+});
+
+router.get("/byuserId/:id", async (req, res) => {
+    const id = req.params.id;
+    const listOfPosts = await db.pool.query(
+        "select posts.*, json_arrayagg(json_object('id', l.id, 'username', l.username)) Likes from posts left join likes as l on posts.username = l.username group by posts.username"
+    );
+    res.json(listOfPosts);
 });
 
 router.post("/", validateToken, async (req, res) => {
