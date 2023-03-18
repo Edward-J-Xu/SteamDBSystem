@@ -11,59 +11,48 @@ const mysql = require('mysql2')
 const db = {};
 
 const pool = mysql.createPool({
-  host: "localhost",
-  user: "newuser",
-  database: "steamdb",
-  password: "password"
+    host: "localhost",
+    user: "newuser",
+    database: "steamdb",
+    password: "password"
 })
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+// let sequelize;
+// if (config.use_env_variable) {
+//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
+// } else {
+//   sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
+
+db.pool = pool.promise();
+
+const loadDataFromSql = (filePath) => {
+    let dataSql = fs.readFileSync(path.join(__dirname, filePath)).toString();
+    dataSql = dataSql.replace(/(\r\n|\n|\r)/gm, "");
+    dataSql.split(";").forEach((sql) => {
+        // console.log("sql: ", sql)
+        if (!sql.length) {
+            return
+        }
+
+        db.pool.query(sql)
+            .then(rev => console.log(rev))
+            .catch(err => console.log(err));
+    })
 }
 
+loadDataFromSql("../createTable.sql")
 
-// fs
-//   .readdirSync(__dirname)
-//   .filter(file => {
-//     return (
-//       file.indexOf('.') !== 0 &&
-//       file !== basename &&
-//       file.slice(-3) === '.js' &&
-//       file.indexOf('.test.js') === -1
-//     );
-//   })
-//   .forEach(file => {
-//     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-//     db[model.name] = model;
-//   });
-//
-// Object.keys(db).forEach(modelName => {
-//   if (db[modelName].associate) {
-//     db[modelName].associate(db);
-//   }
-// });
+db.pool.query(
+    "select * from game limit 1"
+).then(([data, metaData]) => {
+        console.log("data: ", data)
+    }
+).catch(err => {
+    console.log("Errorafa: ", err)
+    loadDataFromSql("../../database/game.sql")
+    }
+)
 
-// db.sequelize = sequelize;
-// db.Sequelize = Sequelize;
-db.pool = pool.promise();
-// db.pool.query(dataSql)
-//     .then(rev => console.log(rev))
-//     .catch(err => console.log(err));
-
-let dataSql = fs.readFileSync(path.join(__dirname, "../createTable.sql")).toString();
-dataSql = dataSql.replace(/(\r\n|\n|\r)/gm, "");
-dataSql.split(";").forEach((sql) => {
-  console.log("sql: ", sql)
-  if (!sql.length) {
-    return
-  }
-
-  db.pool.query(sql)
-      .then(rev => console.log(rev))
-      .catch(err => console.log(err));
-})
 
 module.exports = db;
