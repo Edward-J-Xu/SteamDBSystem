@@ -8,6 +8,7 @@ function Profile() {
   let history = useNavigate();
   const [username, setUsername] = useState("");
   const [listOfPosts, setListOfPosts] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
     
@@ -16,7 +17,8 @@ function Profile() {
     });
 
     axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
-      setListOfPosts(response.data);
+      setListOfPosts(response.data.listOfPosts);
+      setUserInfo(response.data.userInfo);
     });
   }, []);
 
@@ -24,7 +26,8 @@ function Profile() {
     <div className="profilePageContainer">
       <div className="basicInfo">
         {" "}
-        <h1> Username: {username} </h1>
+        <h1> Username: {userInfo[0].username} </h1>
+        <h2> Number of Posts: {userInfo[0].post_count} </h2>
       </div>
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {

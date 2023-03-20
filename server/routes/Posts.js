@@ -44,8 +44,16 @@ router.get("/byuserId/:id", async (req, res) => {
         "where p.username in (select u.username from users as u where u.id = (?)) group by p.id",
         [id]
     );
-    console.log("User's Posts: ", JSON.stringify(listOfPosts[0]));
-    res.json(listOfPosts[0]);
+
+    const userInfo = await db.pool.query(
+        "select users.username, count(*) as post_count " + 
+        "from users join posts on users.username = posts.username " + 
+        "where users.id = (?) " + 
+        "group by users.username",
+        [id]
+    );
+    console.log("User's Info: ", JSON.stringify(userInfo[0]));
+    res.json({listOfPosts: listOfPosts[0], userInfo: userInfo[0]});
 });
 
 router.post("/", validateToken, async (req, res) => {
