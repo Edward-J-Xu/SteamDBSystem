@@ -1,5 +1,4 @@
--- Inserting some users data into userA table
-INSERT INTO userA (username, name, password, region, age, language, platform) VALUES 
+INSERT INTO userA (username, name, password, region, age, language, platform) VALUES
 ('john123', 'John Smith', 'password123', 'USA', 35, 'English', 'PC'),
 ('jane456', 'Jane Doe', 'password456', 'Canada', 28, 'French', 'Xbox'),
 ('bob789', 'Bob Johnson', 'password789', 'Mexico', 42, 'Spanish', 'PlayStation');
@@ -160,23 +159,23 @@ INSERT INTO game (name, description, genre, language, platform, developer, relea
 ('Royal Defense', 'abc', 'Indie', 'Portuguese - Brazil', 'WIN', 'Good Games', 2014, 11, 10, 4.2, 5.7, 'https://steamcdn-a.akamaihd.net/steam/apps/291170/header.jpg'),
 ('Mystik Belle', 'abc', 'Action', 'Italian', 'LNX', 'Last Dimension', 2015, 5, 22, 4.1, 17.2, 'https://steamcdn-a.akamaihd.net/steam/apps/332610/header.jpg');
 
--- Inserting data for post
+
 INSERT INTO post (username, gid, title, postText) VALUES
 ('john123', 1, 'Love Super Adventure!', 'I just finished the main story, and it was awesome!'),
 ('jane456', 2, 'Racing Legends multiplayer', 'Looking for people to play Racing Legends multiplayer with.');
 
--- Inserting data for comment
+
 INSERT INTO comment (comment_body, post_id, username) VALUES
 ('I totally agree! Super Adventure is great!', 1, 'john123'),
 ('I would love to play Racing Legends multiplayer!', 2, 'jane456');
 
--- Inserting data for likes
+
 INSERT INTO likes (post_id, user_id) VALUES
 (1, 1),
 (1, 2),
 (2, 3);
 
--- Inserting data for own
+
 INSERT INTO own (username, gid) VALUES
 ('john123', 1),
 ('john123', 2),
