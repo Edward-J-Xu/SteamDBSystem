@@ -1,8 +1,8 @@
 /* Feature: Register
    Example: username: bob6  password: 123456
 */
-insert into userA (username, password)
-values ('bob6', '123456');
+insert into userA (username, name, password, region, age, language, platform)
+values ('bob6', 'Bob', '123456', 'Canada', 21, 'English', 'Windows');
 
 select * from userA where username = 'bob6';
 
@@ -12,51 +12,61 @@ select * from userA where username = 'bob6';
 select username from userA
 where username = 'bob6' and password = '123456';
 
-/* Feature: Fill profile information
-   Example: user bob6 fill his age as 21 and his language as Mandarin
+/* Feature: Add/Delete Post
+   Example: bob6 reviews game with game id 2
 */
-update userA
-set age = 21
+insert into post(username, gid, title, postText)
+values ('bob6', 2, 'Bobs Review', 'not bad');
+select * from post where username = 'bob6';
+select * from post where gid = 2;
+
+delete from post
 where username = 'bob6';
-update userA
-set language = 'Mandarin'
-where username = 'bob6';
+
+select * from post where gid = 2;
+
+/* Feature: Add/Delete Comment
+*/
+insert into comment(comment_body, post_id, username)
+values ('This game is fun!', 2, 'bob6');
+select * 
+from comment natural join (select username, name
+			         from userA
+			         where username = 'bob6') as T;
+
+
+/* Feature: Display all the attributes of a user, including the number of posts he made
+   Example: user bob6 looks up his own profile
+*/
 select * from userA where username = 'bob6';
 
-/* Feature: Insert into owned games
-*/
-insert into own
-values ('bob6', 112);
-select * from own where username = 'bob6';
+insert into post(username, gid, title, postText)
+values ('bob6', 2, 'Bobs Review', 'not bad');
 
-/* Feature: Look up all games the user own
-   Example: user bob6 looks up his own list, 
-            and shows all games' name, image, genre, language, rating
-*/
-select name, game_image, genre, language, rating
-from own, game
-where own.gid = game.game_id
-and own.username = 'bob6';
+insert into post(username, gid, title, postText)
+values ('bob6', 2, 'Bobs 2nd Review', 'kinda bad actually');
 
-/* Feature: Search game by name, sort by rating by default, and use filter
-   Example: searching "car", and then select language 'English'
-*/
-select name, game_image, genre, language, rating
-from game 
-where name like '%car%'
-and language = 'English'
-order by rating desc;
+insert into post(username, gid, title, postText)
+values ('bob6', 1, 'Bobs 3rd Review', 'not bad actually');
 
-/* Feature: Create review
-*/
-insert into review(username, gid, star_rating, review_body)
-values ('bob6', 112, 4.5 , 'not bad');
-select * from review where username = 'bob6';
-select * from game where game_id = 112;
+select userA.username, count(*) as post_count
+from userA join post on userA.username = post.username
+where userA.username = 'bob6'
+group by userA.username;
 
-/* Feature: Create comment
-   Example: user bob6 comments game 111 with "This game is fun!"
+
+/* Feature: Liking a post
 */
-insert into comment(username, gid, comment_id, commenter, comment_body)
-values ('bob6', 112, 10, 'bob6', 'This game is fun!');
-select * from comment where username = 'bob6' and gid = 112;
+ insert into likes(post_id, user_id)
+ values (1, 4);
+ 
+ select * from likes;
+ 
+ select P.id as Post, count(user_id) as Likes
+ from post as P left outer join likes as L on P.id = L.post_id
+ group by P.id;
+
+
+
+
+
