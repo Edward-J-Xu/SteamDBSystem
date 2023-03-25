@@ -26,33 +26,56 @@ const pool = mysql.createPool({
 
 db.pool = pool.promise();
 
-const loadDataFromSql = (filePath) => {
-    let dataSql = fs.readFileSync(path.join(__dirname, filePath)).toString();
-    dataSql = dataSql.replace(/(\r\n|\n|\r)/gm, "");
-    dataSql.split(";").forEach((sql) => {
-        // console.log("sql: ", sql)
+const executeSql = async (sqlArray) => {
+    let counter = 0
+    for (const sql of sqlArray) {
         if (!sql.length) {
             return
         }
+        console.log(counter++)
 
-        db.pool.query(sql)
-            .then(rev => console.log(rev))
-            .catch(err => console.log(err));
-    })
+        try {
+            const res = await db.pool.query(sql)
+            console.log("1: ", res)
+        } catch (err)  {
+            console.log("err: ", err)
+        }
+    }
+    console.log("finished!")
+    return 1
 }
 
-loadDataFromSql("../../SQL/createtables.sql")
+const loadDataFromSql = (filePath) => {
 
-db.pool.query(
-    "select * from game limit 1"
-).then(([data, metaData]) => {
-        console.log("data: ", data)
-    }
-).catch(err => {
-    console.log("Errorafa: ", err)
-    loadDataFromSql("../../SQL/insert.sql")
-    }
-)
+    let dataSql = fs.readFileSync(path.join(__dirname, filePath)).toString();
+    dataSql = dataSql.replace(/(\r\n|\n|\r)/gm, "");
+    // console.log("dataSQL:", dataSql)
+    // let counter = 0
+    const sentences = dataSql.split(";")
+    return executeSql(sentences)
+
+}
+
+loadDataFromSql("../../SQL/createtables.sql").then(result => {
+    console.log("result outter", result)
+    db.pool.query(
+        "select * from game limit 1"
+    ).then(([data, metaData]) => {
+            console.log("data: ", data)
+            if (data.length == 0) {
+                loadDataFromSql("../../SQL/insert.sql").then(result => {
+                    console.log("result inner: ", result)
+                })
+            }
+        }
+    ).catch(err => {
+            console.log("Errorafa: ", err)
+            loadDataFromSql("../../SQL/insert.sql")
+        }
+    )
+}).catch(err => console.log("outer err: ", err))
+
+
 
 
 module.exports = db;
