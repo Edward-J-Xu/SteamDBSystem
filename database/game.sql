@@ -1,4 +1,4 @@
-insert into game values
+insert into games values
 (0, 'RibbonChase', 'Casual', 'English', 'WIN', 'Captain', 2017, 11, 14, null, 999.0, 'https://steamcdn-a.akamaihd.net/steam/apps/728620/header.jpg'),
 (1, 'Toy Soldiers 3 - Desktop Version', 'Indie', 'English', 'WIN', 'Ecliptec Mobile Ltd.', 2021, 01, 05, null, 2499.0, 'https://cdn.akamai.steamstatic.com/steam/apps/1487740/header.jpg'),
 (2, 'Eggy', 'Indie', 'Portuguese - Brazil', 'WIN', 'Glenn Verheij', 2021, 07, 20, null, 1099.0, 'https://cdn.akamai.steamstatic.com/steam/apps/1523670/header.jpg'),
