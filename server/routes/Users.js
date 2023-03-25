@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
         //     password: hash,
         // });
         console.log("hash: ", hash);
-        db.pool.query("insert into users (username, password) values (?, ?)", [
+        db.pool.query("insert into userA (username, password) values (?, ?)", [
             username,
             hash,
         ]);
@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
     // Find if exists in table
     // const user = await Users.findOne({ where: { username: username } });
     const [user, fieldData] = await db.pool.query(
-        "select * from users where username = (?)",
+        "select * from userA where username = (?)",
         [username]
     );
     console.log("username: ", user[0]);
@@ -62,7 +62,7 @@ router.get("/basicinfo/:id", async (req, res) => {
     const id = req.params.id;
 
     const basicInfo = await db.pool.query(
-        "select id, username from users where id = (?)",
+        "select id, username from userA where id = (?)",
         [id]
     );
 
