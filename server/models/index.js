@@ -41,7 +41,7 @@ const loadDataFromSql = (filePath) => {
     })
 }
 
-loadDataFromSql("../createTable.sql")
+loadDataFromSql("../../SQL/createtables.sql")
 
 db.pool.query(
     "select * from game limit 1"
@@ -50,7 +50,7 @@ db.pool.query(
     }
 ).catch(err => {
     console.log("Errorafa: ", err)
-    loadDataFromSql("../../database/game.sql")
+    loadDataFromSql("../../SQL/insert.sql")
     }
 )
 
