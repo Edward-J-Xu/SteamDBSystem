@@ -1,48 +1,60 @@
 create table userA
 (
-    username varchar(15) primary key not null,
+    id int not null auto_increment primary key,
+    username varchar(15) unique not null,
     name varchar(30),
     password varchar(60) not null,
     region varchar(30),
     age numeric(2, 0) check(age >= 0),
     language varchar(30),
-    platform varchar(30),
-    profile_picture varchar(2048)
-);
-
-create table friend
-(
-    follower varchar(15) not null,
-    followee varchar(15) not null,
-    primary key(follower, followee),
-    foreign key(follower) references userA(username),
-    foreign key(followee) references userA(username)
+    platform varchar(30)
 );
 
 create table game
 (
-    game_id int not null primary key,
+    game_id int not null auto_increment primary key,
     name varchar(60) unique not null,
+    description TEXT(16383) not null,
     genre varchar(30) not null,
     language varchar(30) not null,
     platform varchar(30) not null,
-    developer varchar(30) not null,
+    developer varchar(100) not null,
     release_year smallint not null,
     release_month smallint not null,
     release_day smallint not null,
     rating numeric(2, 1),
-    current_price int not null check(current_price >= 0),
+    current_price DOUBLE PRECISION not null check(current_price >= 0),
     game_image varchar(2048)
 );
 
-create table wishlist
+create table post
 (
+    id int not null auto_increment primary key,
     username varchar(15) not null,
     gid int not null,
-    desire_rating numeric(2, 0) not null,
-    primary key(username, gid),
+    title varchar(512) not null,
+    postText varchar(512) not null,
     foreign key(username) references userA(username),
     foreign key(gid) references game(game_id)
+);
+
+create table comment
+(
+    id int not null auto_increment primary key,
+    comment_body varchar(512) not null,
+    post_id int not null,
+    username varchar(15) not null,
+    foreign key(username) references userA(username),
+    foreign key(post_id) references post(id)
+);
+
+create table likes
+(
+    post_id int not null,
+    user_id int not null,
+    primary key(post_id, user_id),
+    foreign key(post_id) references post(id),
+    foreign key(user_id) references userA(id)
 );
 
 create table own
@@ -53,28 +65,3 @@ create table own
     foreign key(username) references userA(username),
     foreign key(gid) references game(game_id)
 );
-
-create table review
-(
-    username varchar(15) not null,
-    gid int not null,
-    star_rating numeric(2,1) not null,
-    review_body varchar(512),
-    primary key(username, gid),
-    foreign key(username) references userA(username),
-    foreign key(gid) references game(game_id)
-);
-
-create table comment
-(
-    username varchar(15) not null,
-    gid int not null,
-    comment_id int not null,
-    commenter varchar(15),
-    comment_body varchar(512),
-    primary key(username, gid, comment_id),
-    foreign key(username, gid) references review(username, gid),
-    foreign key(commenter) references userA(username)
-);
-
-
