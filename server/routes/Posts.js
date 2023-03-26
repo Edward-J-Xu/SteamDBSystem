@@ -36,7 +36,6 @@ router.get("/byId/:id", async (req, res) => {
 });
 
 router.get("/byuserId/:id", async (req, res) => {
-    console.log("User's Ran!!!!!!!!!! ");
     const id = req.params.id;
     const listOfPosts = await db.pool.query(
         "select p.*, count(l.post_id) as likeCount " + 
@@ -60,13 +59,14 @@ router.get("/byuserId/:id", async (req, res) => {
 router.post("/", validateToken, async (req, res) => {
     const post = req.body;
     post.username = req.user.username;
+    const parsedGid = parseInt(post.gameId);
     // Create / Insert Posts
     console.log("creating a post:", post);
     // await Posts.create(post);
     try {
         await db.pool.query(
-            "insert into post (title, postText, username) values (?, ?, ?)",
-            [post.title, post.postText, post.username]
+            "insert into post (title, postText, username, gid) values (?, ?, ?, ?)",
+            [post.title, post.postText, post.username, parsedGid]
         );
     } catch (e) {
         console.log(e);
