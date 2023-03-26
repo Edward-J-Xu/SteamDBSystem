@@ -47,7 +47,7 @@ router.get("/byuserId/:id", async (req, res) => {
     );
     console.log("User's Posts: ", JSON.stringify(listOfPosts[0]));
     const userInfo = await db.pool.query(
-        "select userA.username, count(*) as post_count " + 
+        "select userA.*, count(*) as post_count " + 
         "from userA join post on userA.username = post.username " + 
         "where userA.id = (?) " + 
         "group by userA.username",
