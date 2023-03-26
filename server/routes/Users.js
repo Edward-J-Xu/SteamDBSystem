@@ -68,7 +68,6 @@ router.get("/auth", validateToken, (req, res) => {
 router.get("/basicinfo/:id", async (req, res) => {
     const id = req.params.id;
 
-    console.log("Hey!!!!!!!")
     const basicInfo = await db.pool.query(
         "select id, username from userA where id = (?)",
         [id]
