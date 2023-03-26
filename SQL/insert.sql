@@ -1,7 +1,7 @@
 INSERT INTO userA (username, name, password, region, age, language, platform) VALUES
-('john123', 'John Smith', 'password123', 'USA', 35, 'English', 'PC'),
-('jane456', 'Jane Doe', 'password456', 'Canada', 28, 'French', 'Xbox'),
-('bob789', 'Bob Johnson', 'password789', 'Mexico', 42, 'Spanish', 'PlayStation');
+('john123', 'John Smith', 'password123', 'North America', 35, 'English', 'PC'),
+('jane456', 'Jane Doe', 'password456', 'South America', 28, 'French', 'Xbox'),
+('bob789', 'Bob Johnson', 'password789', 'Europe', 42, 'Spanish', 'PlayStation');
 
 
 INSERT INTO game (name, description, genre, language, platform, developer, release_year, release_month, release_day, rating, current_price, game_image) VALUES
