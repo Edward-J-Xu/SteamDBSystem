@@ -11,7 +11,6 @@ function Profile() {
   const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    
     axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
       setUsername(response.data[0][0].username);
     });
@@ -26,8 +25,8 @@ function Profile() {
     <div className="profilePageContainer">
       <div className="basicInfo">
         {" "}
-        <h1> Username: {userInfo[0].username} </h1>
-        <h2> Number of Posts: {userInfo[0].post_count} </h2>
+        <h1> Username: {userInfo[0] && userInfo[0].username} </h1>
+        <h2> Number of Posts: {userInfo[0] && userInfo[0].post_count} </h2>
       </div>
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {

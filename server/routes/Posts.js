@@ -36,6 +36,7 @@ router.get("/byId/:id", async (req, res) => {
 });
 
 router.get("/byuserId/:id", async (req, res) => {
+    console.log("User's Ran!!!!!!!!!! ");
     const id = req.params.id;
     const listOfPosts = await db.pool.query(
         "select p.*, count(l.post_id) as likeCount " + 
@@ -44,7 +45,7 @@ router.get("/byuserId/:id", async (req, res) => {
         "where p.username in (select u.username from userA as u where u.id = (?)) group by p.id",
         [id]
     );
-
+    console.log("User's Posts: ", JSON.stringify(listOfPosts[0]));
     const userInfo = await db.pool.query(
         "select userA.username, count(*) as post_count " + 
         "from userA join post on userA.username = post.username " + 
