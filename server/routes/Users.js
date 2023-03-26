@@ -7,16 +7,23 @@ const { sign } = require("jsonwebtoken");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.post("/", async (req, res) => {
-    const { username, password } = req.body;
+    const { name, username, password, age, region, language, platform } = req.body;
+    const parsedAge = parseInt(age);
     bcrypt.hash(password, 10).then((hash) => {
         // Users.create({
         //     username: username,
         //     password: hash,
         // });
         console.log("hash: ", hash);
-        db.pool.query("insert into userA (username, password) values (?, ?)", [
+        db.pool.query("insert into userA (username, name, password, region, age, language, platform)" 
+        + " values (?, ?, ?, ?, ?, ?, ?)", [
             username,
+            name,
             hash,
+            region,
+            parsedAge,
+            language,
+            platform,
         ]);
         res.json("SUCCESS");
     });
