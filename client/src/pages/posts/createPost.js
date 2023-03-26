@@ -19,6 +19,7 @@ function CreatePost() {
     const initialValues = {
         title: "",
         postText: "",
+        gameId: "",
     };
 
     useEffect(() => {
@@ -31,6 +32,9 @@ function CreatePost() {
     const validationSchema = Yup.object().shape({
         title: Yup.string().required("You must input a Title!"),
         postText: Yup.string().required(),
+        gameId: Yup.number()
+            .required()
+            .max(199, "Game ID must be less than 200"),
     });
 
     const onSubmit = (data) => {
@@ -63,10 +67,10 @@ function CreatePost() {
                 validationSchema={validationSchema}
             >
                 <Form className="formContainer">
-                    <label>Title: </label>
+                <label>Title: </label>
                     <ErrorMessage name="title" component="span" />
                     <Field
-                        autocomplete="off"
+                        autoComplete="off"
                         id="inputCreatePost"
                         name="title"
                         placeholder="(Ex. Title...)"
@@ -74,10 +78,18 @@ function CreatePost() {
                     <label>Post: </label>
                     <ErrorMessage name="postText" component="span" />
                     <Field
-                        autocomplete="off"
+                        autoComplete="off"
                         id="inputCreatePost"
                         name="postText"
                         placeholder="(Ex. Post...)"
+                    />
+                    <label>Game ID: </label>
+                    <ErrorMessage name="gameId" component="span" />
+                    <Field
+                        autoComplete="off"
+                        id="inputCreatePost"
+                        name="gameId"
+                        placeholder="(Between 1 and 199)"
                     />
 
                     <button type="submit"> Create Post</button>
