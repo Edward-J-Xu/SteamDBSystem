@@ -55,16 +55,11 @@ where userA.username = 'bob6'
 group by userA.username;
 
 
-/* Feature: Liking a post
+/* Feature: Display games in alphabetical order
 */
- insert into likes(post_id, user_id)
- values (1, 4);
- 
- select * from likes;
- 
- select P.id as Post, count(user_id) as Likes
- from post as P left outer join likes as L on P.id = L.post_id
- group by P.id;
+select * from game 
+order by name asc
+limit 10
 
 
 

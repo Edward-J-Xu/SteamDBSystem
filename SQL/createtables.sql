@@ -14,7 +14,7 @@ create table if not exists game
 (
     game_id int not null auto_increment primary key,
     name varchar(60) unique not null,
-    description TEXT(16383) not null,
+    description text not null,
     genre varchar(30) not null,
     language varchar(30) not null,
     platform varchar(30) not null,
