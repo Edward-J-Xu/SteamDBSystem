@@ -9,12 +9,13 @@
 
 ## Project Startup
 
-If first time starting this project, please run `npm install` in both frontEnd and backEnd
+**!! If first time starting this project, please run `npm install` in both frontEnd and backEnd !!**
 
-Inside Command line, Login in MySql and do setup:
+Inside Command line, Login in MySql and do setup. **Only do this when first starting**:
 
 ```sql
 mysql -u root -p mysql
+DROP SCHEMA IF EXISTS steamdb;
 CREATE SCHEMA IF NOT EXISTS steamdb;
 CREATE USER IF NOT EXISTS 'newuser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON steamdb.* TO 'newuser'@'localhost';
