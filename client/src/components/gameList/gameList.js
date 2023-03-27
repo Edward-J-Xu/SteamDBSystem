@@ -8,7 +8,8 @@ const GameList = () => {
   const { type } = useParams();
 
   const getData = () => {
-    fetch(`http://localhost:3001/games`)
+    if (type == "all") {
+      fetch(`http://localhost:3001/games/all`)
         .then(res => {
             console.log(res)
             return res.json()
@@ -17,6 +18,28 @@ const GameList = () => {
           console.log("data: ", data)
           setGameList(data)
         })
+    } else if (type == "top_rated") {
+      fetch(`http://localhost:3001/games/top_rated`)
+        .then(res => {
+            console.log(res)
+            return res.json()
+        })
+        .then(data => {
+          console.log("data: ", data)
+          setGameList(data)
+        })
+    } else {
+      fetch(`http://localhost:3001/games/new`)
+        .then(res => {
+            console.log(res)
+            return res.json()
+        })
+        .then(data => {
+          console.log("data: ", data)
+          setGameList(data)
+        })
+    }
+    
   }
 
 

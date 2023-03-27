@@ -78,7 +78,7 @@ router.post("/", validateToken, async (req, res) => {
 router.delete("/:postId", validateToken, async (req, res) => {
     const postId = req.params.postId;
     try {
-        await db.pool.query("delete from posts where id = (?)", [postId]);
+        await db.pool.query("delete from post where id = (?)", [postId]);
         res.json("DELETED SUCCESSFULLY");
     } catch (e) {
         console.log(e);
