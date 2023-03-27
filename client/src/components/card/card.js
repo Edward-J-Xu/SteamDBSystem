@@ -10,8 +10,8 @@ const Cards = ({game}) => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false)
-        }, 1500)
-    }, []) 
+        }, 300)
+    }, [])
 
     return <>
     {
@@ -19,7 +19,7 @@ const Cards = ({game}) => {
         ?
         <div className="cards">
             <SkeletonTheme color="#202020" highlightColor="#444">
-                <Skeleton height={300} duration={2} />
+                <Skeleton height={150}  />
             </SkeletonTheme>
         </div>
         :

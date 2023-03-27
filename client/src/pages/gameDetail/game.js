@@ -9,7 +9,7 @@ const Game = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    getData();
+    getData2();
     window.scrollTo(0, 0);
   }, []);
 
@@ -24,6 +24,14 @@ const Game = () => {
       },
     });
   };
+
+
+  const getData2 = () => {
+    fetch(`http://localhost:3001/games/${id}`)
+        .then(res => res.json())
+        .then(data => setGame(data))
+  }
+
 
   return (
     <div className="game">
