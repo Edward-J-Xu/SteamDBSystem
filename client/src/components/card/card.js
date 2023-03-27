@@ -10,8 +10,8 @@ const Cards = ({game}) => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false)
-        }, 1500)
-    }, []) 
+        }, 300)
+    }, [])
 
     return <>
     {
@@ -19,20 +19,20 @@ const Cards = ({game}) => {
         ?
         <div className="cards">
             <SkeletonTheme color="#202020" highlightColor="#444">
-                <Skeleton height={300} duration={2} />
+                <Skeleton height={150}  />
             </SkeletonTheme>
         </div>
         :
-        <Link to={`/game/${game.id}`} style={{textDecoration:"none", color:"white"}}>
+        <Link to={`/game/${game.game_id}`} style={{textDecoration:"none", color:"white"}}>
             <div className="cards">
-                <img className="cards__img" src={`https://image.tmdb.org/t/p/original${game?game.poster_path:""}`} />
+                <img className="cards__img" src={game.game_image ? game.game_image : ""} alt={game.name} />
                 <div className="cards__overlay">
-                    <div className="card__title">{game?game.original_title:""}</div>
+                    <div className="card__title">{game.name}</div>
                     <div className="card__runtime">
-                        {game?game.release_date:""}
-                        <span className="card__rating">{game?game.vote_average:""}<i className="fas fa-star" /></span>
+                        {`${game.release_year}-${game.release_month}-${game.release_day}`}
+                        <span className="card__rating">{game.rating}<i className="fas fa-star" /></span>
                     </div>
-                    <div className="card__description">{game ? game.overview.slice(0,118)+"..." : ""}</div>
+                    <div className="card__description">{game.description ? game.description.slice(0,118)+"..." : ""}</div>
                 </div>
             </div>
         </Link>

@@ -41,6 +41,7 @@ function Post() {
     useEffect(() => {
         // Get Posts
         axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+            console.log("posts: ", response)
             setPostObject(response.data);
         });
 
@@ -86,7 +87,7 @@ function Post() {
             .then(() => {
                 setComments(
                     comments.filter((val) => {
-                        return val.id != id;
+                        return val.id !== id;
                     })
                 );
             });

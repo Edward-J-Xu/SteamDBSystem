@@ -5,8 +5,9 @@ const db = require("../models/index");
 
 router.get("/", async (req, res) => {
     const [data, metaData] = await db.pool.query(
-        "select * from game"
+        "select * from game order by name"
     )
+    console.log("call get game api: ", data[0])
     res.json(data)
 })
 
@@ -17,7 +18,7 @@ router.get("/:id", async (req, res) => {
         "select * from game where game_id = (?)", [
         id,
     ]);
-    console.log("viewing a post: ", JSON.stringify(data[0]));
+    console.log("getting a game: ", data[0]);
     res.json(data[0]);
 });
 
