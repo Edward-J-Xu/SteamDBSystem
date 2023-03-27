@@ -1,6 +1,6 @@
 create table userA
 (
-    id int not null IDENTITY(1,1) primary key,
+    id int not null auto_increment primary key,
     username varchar(15) unique not null,
     name varchar(30),
     password varchar(60) not null,
@@ -12,7 +12,7 @@ create table userA
 
 create table game
 (
-    game_id int not null IDENTITY(1,1) primary key,
+    game_id int not null auto_increment primary key,
     name varchar(60) unique not null,
     description text not null,
     genre varchar(30) not null,
@@ -29,7 +29,7 @@ create table game
 
 create table post
 (
-    id int not null IDENTITY(1,1) primary key,
+    id int not null auto_increment primary key,
     username varchar(15) not null,
     gid int not null,
     title varchar(512) not null,
@@ -40,7 +40,7 @@ create table post
 
 create table comment
 (
-    id int not null IDENTITY(1,1) primary key,
+    id int not null auto_increment primary key,
     comment_body varchar(512) not null,
     post_id int not null,
     username varchar(15) not null,
