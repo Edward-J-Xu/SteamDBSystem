@@ -1,32 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./game.css";
 import { useParams } from "react-router-dom";
-import Papa from "papaparse";
-import gameDataCSV from "../../database/gamedb.csv";
 
 const Game = () => {
   const [currentGameDetail, setGame] = useState();
   const { id } = useParams();
 
   useEffect(() => {
-    getData2();
+    getData();
     window.scrollTo(0, 0);
   }, []);
 
   const getData = () => {
-    Papa.parse(gameDataCSV, {
-      header: true,
-      download: true,
-      dynamicTyping: true,
-      complete: (results) => {
-        const game = results.data.find((game) => game.game_id === parseInt(id));
-        setGame(game);
-      },
-    });
-  };
-
-
-  const getData2 = () => {
     fetch(`http://localhost:3001/games/${id}`)
         .then(res => res.json())
         .then(data => setGame(data))

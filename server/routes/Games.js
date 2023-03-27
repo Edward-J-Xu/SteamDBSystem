@@ -5,7 +5,7 @@ const db = require("../models/index");
 
 router.get("/", async (req, res) => {
     const [data, metaData] = await db.pool.query(
-        "select * from game"
+        "select * from game order by name"
     )
     console.log("call get game api: ", data[0])
     res.json(data)
