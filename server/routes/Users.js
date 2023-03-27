@@ -7,16 +7,23 @@ const { sign } = require("jsonwebtoken");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.post("/", async (req, res) => {
-    const { username, password } = req.body;
+    const { name, username, password, age, region, language, platform } = req.body;
+    const parsedAge = parseInt(age);
     bcrypt.hash(password, 10).then((hash) => {
         // Users.create({
         //     username: username,
         //     password: hash,
         // });
         console.log("hash: ", hash);
-        db.pool.query("insert into users (username, password) values (?, ?)", [
+        db.pool.query("insert into userA (username, name, password, region, age, language, platform)" 
+        + " values (?, ?, ?, ?, ?, ?, ?)", [
             username,
+            name,
             hash,
+            region,
+            parsedAge,
+            language,
+            platform,
         ]);
         res.json("SUCCESS");
     });
@@ -28,7 +35,7 @@ router.post("/login", async (req, res) => {
     // Find if exists in table
     // const user = await Users.findOne({ where: { username: username } });
     const [user, fieldData] = await db.pool.query(
-        "select * from users where username = (?)",
+        "select * from userA where username = (?)",
         [username]
     );
     console.log("username: ", user[0]);
@@ -62,7 +69,7 @@ router.get("/basicinfo/:id", async (req, res) => {
     const id = req.params.id;
 
     const basicInfo = await db.pool.query(
-        "select id, username from users where id = (?)",
+        "select id, username from userA where id = (?)",
         [id]
     );
 
