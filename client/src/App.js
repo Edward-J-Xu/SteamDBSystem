@@ -82,10 +82,10 @@ function App() {
                                 <>
                                     {/* Milestone 1 */}
                                     <Link
-                                        to="/games/popular"
+                                        to="/games/all"
                                         style={{ textDecoration: "none" }}
                                     >
-                                        <span>Popular</span>
+                                        <span>All Games</span>
                                     </Link>
                                     <Link
                                         to="/games/top_rated"
@@ -94,10 +94,10 @@ function App() {
                                         <span>Top Rated</span>
                                     </Link>
                                     <Link
-                                        to="/games/upcoming"
+                                        to="/games/new"
                                         style={{ textDecoration: "none" }}
                                     >
-                                        <span>Upcoming</span>
+                                        <span>New</span>
                                     </Link>
                                     <Link
                                         to="/games/posts"

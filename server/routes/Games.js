@@ -3,11 +3,25 @@ const router = express.Router();
 const db = require("../models/index");
 
 
-router.get("/", async (req, res) => {
+router.get("/all", async (req, res) => {
     const [data, metaData] = await db.pool.query(
         "select * from game order by name"
     )
     console.log("call get game api: ", data[0])
+    res.json(data)
+})
+
+router.get("/top_rated", async (req, res) => {
+    const [data, metaData] = await db.pool.query(
+        "select * from game order by rating desc"
+    )
+    res.json(data)
+})
+
+router.get("/new", async (req, res) => {
+    const [data, metaData] = await db.pool.query(
+        "select * from game order by release_year desc, release_month desc, release_day desc"
+    )
     res.json(data)
 })
 
