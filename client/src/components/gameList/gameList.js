@@ -2,34 +2,25 @@ import React, { useEffect, useState } from "react";
 import "./gameList.css";
 import { useParams } from "react-router-dom";
 import Cards from "../card/card";
-import Papa from "papaparse";
-import gameDataCSV from "../../database/gamedb.csv";
 
 const GameList = () => {
   const [gameList, setGameList] = useState([]);
   const { type } = useParams();
 
-  useEffect(() => {
-    const getData = () => {
-      Papa.parse(gameDataCSV, {
-        header: true,
-        download: true,
-        dynamicTyping: true,
-        complete: (results) => {
-          let data = results.data;
-          if (type) {
-            if (type.toLowerCase() === "popular" || type.toLowerCase() === "top_rated") {
-              data.sort((a, b) => b.rating - a.rating);
-              data = data.slice(0, 50); // Show top 50 games
-            } else {
-              data = data.filter((game) => game.genre.toLowerCase() === type.toLowerCase());
-            }
-          }
-          setGameList(data);
-        },
-      });
-    };
+  const getData = () => {
+    fetch(`http://localhost:3001/games`)
+        .then(res => {
+            console.log(res)
+            return res.json()
+        })
+        .then(data => {
+          console.log("data: ", data)
+          setGameList(data)
+        })
+  }
 
+
+  useEffect(() => {
     getData();
   }, [type]);
 

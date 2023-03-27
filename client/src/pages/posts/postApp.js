@@ -28,6 +28,7 @@ const PostApp = () => {
                     },
                 })
                 .then((response) => {
+                    console.log("posts: ", response)
                     setListOfPosts(response.data.listOfPosts);
                     setLikedPosts(
                         response.data.likedPosts.map((like) => {
