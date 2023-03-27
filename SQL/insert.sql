@@ -1,4 +1,4 @@
--- Inserting some users data into userA table
+
 INSERT INTO userA (username, name, password, region, age, language, platform) VALUES
 ('frankharrison', 'Rebecca Elliott', 'iZP9FsNSfb', 'Guinea-Bissau', 57, 'Aragonese', 'WIN'),
 ('jennifermiller', 'Zachary Norman', '3S4Zsl8yX9Q', 'Seychelles', 55, 'Tsonga', 'WIN'),
@@ -259,7 +259,7 @@ INSERT INTO game (name, description, genre, language, platform, developer, relea
 ('Mystik Belle', 'Being a student of mystical arts is hard work, doubly so if you are Belle MacFae - a freshman student at Hagmore School of Magic. The teachers and the staff are mean, her friends are few, and her grades suck. Worst of all - Belle has a tendency to be at exactly the wrong place at exactly the wrongest time. Like tonight, for example, when she stayed up late to practice her fire magic, but instead got framed for upsetting an ancient ritual. And what better way is there to punish an unlucky first-year student, than to charge her with an impossible task on the worst night of the year? Re-create the Walpurgisnacht Brew, or be expelled, and with all manner of spooks taking over the school, expulsion is starting to sound better by the minute.<br><br>Inspired by games like <strong>Slightly Magic, Puff in Dragonland, and the Dizzy series</strong>, Mystik Belle is a hybrid of a classic point-and-click adventure and a modern metroidvania.<br><br>You may experience all of the following while playing this game:<br><br><ul><li>Get hopelessly lost in the massive school building and its surrounding areas.<br></li><li>Find items and solve inventory puzzles. Or just clog up your pockets with useless junk.<br></li><li>Interact with other inhabitants of Hagmore. Learn clues, help them out, ruin their day with angry flies.<br></li><li>Fight through hallways infested by over 60 unique monster types.<br></li><li>Defeat 8 bosses.<br></li><li>Learn new magical and not-so-magical abilities.<br></li><li>Ogle at retina-burningly colorful pixel art.<br></li><li>Punch Cthulhu in the face.</li></ul><br><br><ul><li> <strong>PLEASE</strong> be advised: Mystik Belle is NOT just a metroidvania - it''s a true adventure game. You will not get far without having to solve inventory puzzles or talking to people.<br></li><li> By default, the game contains some language not suitable for younger kids. A much more kid-friendly E-10 version of the dialogue is included, and can be selected from the options menu.<br></li><li> OSx version of the game doesn''t support the Steam features like the overlay, achievements and trading cards. I will look for a way to get this sorted out as soon as I can. You can still get the game''s internal achievements which will transfer to your Steam achievements once this is fixed.<br></li><li> I am temporarily unable to update the Mac version of the game due to changes to OSX and introduction of mandatory developer fees. I will resume Mac updates once I have the money to pay Apple their ransom.<br></li><li> Linux version of the game appears to only reliably support the Xbox 360 controller. This is a known issue of all GameMaker Studio games. More information regarding it can be found <a>here.</a></li></ul><br>', 'Adventure', 'French', 'WIN', 'Last Dimension', 2015, 05, 22, 4.1, 17.2, 'https://steamcdn-a.akamaihd.net/steam/apps/332610/header.jpg');
 
 
--- Inserting data for post
+
 INSERT INTO post (username, gid, title, postText) VALUES
 ('woodscott', 124, 'Serious could.', 'Already two drive attack. Common Mrs always hotel.'),
 ('connor43', 131, 'Win thousand.', 'Eat pretty quickly news eye husband. Education bill skin ok summer cold.'),
@@ -763,7 +763,6 @@ INSERT INTO post (username, gid, title, postText) VALUES
 ('williamssarah', 65, 'Market easy rather particularly successful coach outside wall black make particularly wonder.', 'Life ask son impact.');
 
 
--- Inserting data for comment
 INSERT INTO comment (comment_body, post_id, username) VALUES
 ('Necessary most about far. Region financial even along her network. Identify total trip. Arm of send live perform much. Defense treat eat billion. Trip to else public book.', 380, 'kylepeterson'),
 ('Stand generation throw firm game.', 274, 'elizabethmontgomery'),
@@ -2771,7 +2770,7 @@ INSERT INTO comment (comment_body, post_id, username) VALUES
 ('Each stand however question foot manager start. Push their degree six. Quite someone level mention theory these. Before time listen with reflect show.', 291, 'stephanie50');
 
 
--- Inserting data for likes
+
 INSERT INTO likes (post_id, user_id) VALUES
 (393, 80),
 (353, 7),
@@ -4778,7 +4777,7 @@ INSERT INTO likes (post_id, user_id) VALUES
 (377, 99);
 
 
--- Inserting data for own
+
 INSERT INTO own (username, gid) VALUES
 ('alexis67', 122),
 ('scottrodriguez', 53),
