@@ -33,7 +33,7 @@ create table if not exists likes
     constraint   like_user_id foreign key (user_id) references users (id) on delete cascade
 );
 
-create table if not exists game
+create table if not exists games
 (
     game_id int primary key,
     name varchar(100) not null,

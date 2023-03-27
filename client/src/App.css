@@ -3,3 +3,11 @@
   color: white;
   font-family: sans-serif;
 }
+
+.profilePageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

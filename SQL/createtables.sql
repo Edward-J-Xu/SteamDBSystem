@@ -1,4 +1,4 @@
-create table userA
+create table if not exists userA
 (
     id int not null IDENTITY(1,1) primary key,
     username varchar(15) unique not null,
@@ -10,7 +10,7 @@ create table userA
     platform varchar(30)
 );
 
-create table game
+create table if not exists game
 (
     game_id int not null IDENTITY(1,1) primary key,
     name varchar(60) unique not null,
@@ -27,7 +27,7 @@ create table game
     game_image varchar(2048)
 );
 
-create table post
+create table if not exists post
 (
     id int not null IDENTITY(1,1) primary key,
     username varchar(15) not null,
@@ -38,7 +38,7 @@ create table post
     foreign key(gid) references game(game_id)
 );
 
-create table comment
+create table if not exists comment
 (
     id int not null IDENTITY(1,1) primary key,
     comment_body varchar(512) not null,
@@ -48,7 +48,7 @@ create table comment
     foreign key(post_id) references post(id)
 );
 
-create table likes
+create table if not exists likes
 (
     post_id int not null,
     user_id int not null,
@@ -57,7 +57,7 @@ create table likes
     foreign key(user_id) references userA(id)
 );
 
-create table own
+create table if not exists own
 (
     username varchar(15) not null,
     gid int not null,
