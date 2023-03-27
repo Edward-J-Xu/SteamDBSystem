@@ -34,7 +34,7 @@ function CreatePost() {
         postText: Yup.string().required(),
         gameId: Yup.number()
             .required()
-            .max(199, "Game ID must be less than 200"),
+            .max(153, "Game ID must be less than 154"),
     });
 
     const onSubmit = (data) => {
@@ -89,7 +89,7 @@ function CreatePost() {
                         autoComplete="off"
                         id="inputCreatePost"
                         name="gameId"
-                        placeholder="(Between 1 and 199)"
+                        placeholder="(Between 1 and 153)"
                     />
 
                     <button type="submit"> Create Post</button>

@@ -153,9 +153,6 @@ function Post() {
                             <div key={key} className="comment">
                                 {comment.comment_body}
                                 <label> Username: {comment.username}</label>
-                                {/* <AuthContext.Provider value={{ authState, setAuthState }}> */}
-                                {/* {console.log("Auth User: ", authState.username)} */}
-                                {/* <h1> Logged in: {authState.username} </h1> */}
                                 {authState.username === comment.username && (
                                     <button
                                         onClick={() => {
@@ -165,7 +162,6 @@ function Post() {
                                         X
                                     </button>
                                 )}
-                                {/* </AuthContext.Provider> */}
                             </div>
                         );
                     })}

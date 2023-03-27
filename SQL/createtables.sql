@@ -34,8 +34,8 @@ create table if not exists post
     gid int not null,
     title varchar(512) not null,
     postText varchar(512) not null,
-    foreign key(username) references userA(username),
-    foreign key(gid) references game(game_id)
+    foreign key(username) references userA(username) on delete cascade,
+    foreign key(gid) references game(game_id) on delete cascade
 );
 
 create table if not exists comment
@@ -44,8 +44,8 @@ create table if not exists comment
     comment_body varchar(512) not null,
     post_id int not null,
     username varchar(15) not null,
-    foreign key(username) references userA(username),
-    foreign key(post_id) references post(id)
+    foreign key(username) references userA(username) on delete cascade,
+    foreign key(post_id) references post(id) on delete cascade
 );
 
 create table if not exists likes
@@ -53,8 +53,8 @@ create table if not exists likes
     post_id int not null,
     user_id int not null,
     primary key(post_id, user_id),
-    foreign key(post_id) references post(id),
-    foreign key(user_id) references userA(id)
+    foreign key(post_id) references post(id) on delete cascade,
+    foreign key(user_id) references userA(id) on delete cascade
 );
 
 create table if not exists own
@@ -62,6 +62,6 @@ create table if not exists own
     username varchar(15) not null,
     gid int not null,
     primary key(username, gid),
-    foreign key(username) references userA(username),
-    foreign key(gid) references game(game_id)
+    foreign key(username) references userA(username) on delete cascade,
+    foreign key(gid) references game(game_id) on delete cascade
 );

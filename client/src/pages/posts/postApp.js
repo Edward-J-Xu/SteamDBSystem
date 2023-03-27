@@ -123,7 +123,6 @@ const PostApp = () => {
                                             : "likeBttn"
                                     }
                                 />
-                                {/* {console.log("Liked[0]: ", value.Likes[0].id)} */}
                                 <label>{value.Likes.length}</label>
                             </div>
                         </div>
