@@ -26,16 +26,16 @@ const pool = mysql.createPool({
 
 db.pool = pool.promise();
 
-const executeSql = async (sqlArray) => {
+const executeSql = async (sqlArray, str) => {
     let counter = 0
     for (const sql of sqlArray) {
         if (!sql.length) {
-            return
+            continue
         }
         console.log(counter++)
 
         try {
-            const res = await db.pool.query(sql)
+            const res = await db.pool.query(str + sql)
             console.log("1: ", res)
         } catch (err)  {
             console.log("err: ", err)
@@ -52,7 +52,19 @@ const loadDataFromSql = (filePath) => {
     // console.log("dataSQL:", dataSql)
     // let counter = 0
     const sentences = dataSql.split(";")
-    return executeSql(sentences)
+    return executeSql(sentences, "")
+
+}
+
+const insertDataFromSql = (filePath) => {
+
+    let dataSql = fs.readFileSync(path.join(__dirname, filePath)).toString();
+    dataSql = dataSql.replace(/(\r\n|\n|\r)/gm, "");
+    // console.log("dataSQL:", dataSql)
+    // let counter = 0
+    const sentences = dataSql.split("INSERT INTO")
+    // console.log("sentences: ", sentences)
+    return executeSql( sentences, "INSERT INTO")
 
 }
 
@@ -63,14 +75,14 @@ loadDataFromSql("../../SQL/createtables.sql").then(result => {
     ).then(([data, metaData]) => {
             console.log("data: ", data)
             if (data.length == 0) {
-                loadDataFromSql("../../SQL/insert.sql").then(result => {
+                insertDataFromSql("../../SQL/insert.sql").then(result => {
                     console.log("result inner: ", result)
                 })
             }
         }
     ).catch(err => {
             console.log("Errorafa: ", err)
-            loadDataFromSql("../../SQL/insert.sql")
+            // loadDataFromSql("../../SQL/insert.sql")
         }
     )
 }).catch(err => console.log("outer err: ", err))
