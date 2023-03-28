@@ -33,3 +33,5 @@ Then under the project directory, run `./Run.sh` to start up both backend and fr
 - Password protection
 - JWT Authentication
 
+## To generate sql data
+See the two jypter notebooks in directory `database/`.
