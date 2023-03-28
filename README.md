@@ -4,7 +4,7 @@
 
 `client/`: FrontEnd of the project <br />
 `server/`: BackEnd of the project, sql commands used in backends are mostly in `routes/`. Loading database to the project is in `models/index.js`  <br />
-`SQL/`: All you need on how to create and load our sample/production database, as well as `test-sample.sql`, `test-production.sql` and their outputs <br />
+`SQL/`: All you need on how to create and load our sample/production database, as well as `test-sample.sql`, `test-production.sql` and their outputs. We are using `steamdb.json` as our data source <br />
 `database/`: Contains the data we use (toy & production) <br />
 
 ## Project Startup
