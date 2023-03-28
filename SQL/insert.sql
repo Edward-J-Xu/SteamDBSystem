@@ -1306,6 +1306,7 @@ INSERT INTO comment (comment_body, post_id, username) VALUES
 ('Positive record five ahead yet manage citizen increase. Tv modern career sister here item. Learn keep space bad assume health institution. Evening start event. Show seek opportunity.', 194, 'gregory66'),
 ('Theory as nation significant share dream way school. Those discuss peace. Break out hospital here be.', 146, 'marcusbauer');
 
+
 INSERT INTO comment (comment_body, post_id, username) VALUES
 ('Magazine decade standard put animal. Lawyer use story provide create. Feel him stock short across learn. Teach decade agree back.', 424, 'alexis67'),
 ('Exactly treatment approach lawyer.', 116, 'johnsonelizabeth'),
@@ -3542,6 +3543,7 @@ INSERT INTO likes (post_id, user_id) VALUES
 (17, 51),
 (397, 43);
 
+
 INSERT INTO likes (post_id, user_id) VALUES
 (216, 31),
 (456, 12),
@@ -3786,6 +3788,7 @@ INSERT INTO likes (post_id, user_id) VALUES
 (329, 41),
 (34, 44),
 (389, 92);
+
 
 INSERT INTO likes (post_id, user_id) VALUES
 (275, 70),
@@ -4455,6 +4458,7 @@ INSERT INTO likes (post_id, user_id) VALUES
 (58, 15),
 (187, 16),
 (152, 58);
+
 
 INSERT INTO likes (post_id, user_id) VALUES
 (407, 19),

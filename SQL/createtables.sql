@@ -1,7 +1,7 @@
 create table if not exists userA
 (
     id int not null auto_increment primary key,
-    username varchar(20) unique not null,
+    username varchar(30) unique not null,
     name varchar(30),
     password varchar(60) not null,
     region varchar(30),
@@ -30,7 +30,7 @@ create table if not exists game
 create table if not exists post
 (
     id int not null auto_increment primary key,
-    username varchar(20) not null,
+    username varchar(30) not null,
     gid int not null,
     title varchar(512) not null,
     postText varchar(512) not null,
@@ -43,7 +43,7 @@ create table if not exists comment
     id int not null auto_increment primary key,
     comment_body varchar(512) not null,
     post_id int not null,
-    username varchar(20) not null,
+    username varchar(30) not null,
     foreign key(username) references userA(username) on delete cascade,
     foreign key(post_id) references post(id) on delete cascade
 );
@@ -59,7 +59,7 @@ create table if not exists likes
 
 create table if not exists own
 (
-    username varchar(20) not null,
+    username varchar(30) not null,
     gid int not null,
     primary key(username, gid),
     foreign key(username) references userA(username) on delete cascade,
