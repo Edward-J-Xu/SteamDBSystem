@@ -9,7 +9,7 @@ router.get("/", validateToken, async (req, res) => {
     // const listOfPosts = await Posts.findAll();
     const [listOfPosts, filedData] = await db.pool.query(
         "select p.*, json_arrayagg(json_object('post_id', l.post_id, 'user_id', l.user_id)) Likes, " + 
-        "(select u.id from userA as u where u.username = p.username) as UserId " +
+        "(select u.id from userA as u where u.username = p.username) as UserId, count(l.post_id) as likeCount " +
         "from post as p left join likes as l on p.id = l.post_id " + 
         "group by p.id"
     );
