@@ -53,22 +53,25 @@ const PostApp = () => {
             .then((response) => {
                 setListOfPosts(
                     listOfPosts.map((post) => {
-                        if (post.Likes[0].id == null) {
-                            console.log(post.Likes.length);
-                            post.Likes.pop();
-                            console.log(post.Likes.length);
-                        }
+                        // if (post.Likes[0].id == null) {
+                        //     console.log(post.Likes.length);
+                        //     post.Likes.pop();
+                        //     console.log(post.Likes.length);
+                        // }
                         if (post.id === postId) {
                             if (response.data.liked) {
-                                return { ...post, Likes: [...post.Likes, 0] };
+                                post.likeCount += 1;
+                                // return { ...post, Likes: [...post.Likes, 0] };
                             } else {
-                                const likesArray = post.Likes;
-                                likesArray.pop();
-                                return { ...post, Likes: likesArray };
+                                // const likesArray = post.Likes;
+                                // likesArray.pop();
+                                // return { ...post, Likes: likesArray };
+                                post.likeCount -= 1;
                             }
                         } else {
                             return post;
                         }
+                        return post;
                     })
                 );
                 if (likedPosts.includes(postId)) {
@@ -124,7 +127,8 @@ const PostApp = () => {
                                             : "likeBttn"
                                     }
                                 />
-                                <label>{value.Likes.length}</label>
+                                {/* <label>{value.Likes.length}</label> */}
+                                <label>{value.likeCount}</label>
                             </div>
                         </div>
                     </div>
