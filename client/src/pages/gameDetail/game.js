@@ -57,7 +57,7 @@ const Game = () => {
             </div>
           </div>
           <div className="game__detailRightBottom">
-            <div className="synopsisText">Synopsis</div>
+            <div className="synopsisText">Description</div>
             <div>
               {currentGameDetail ? currentGameDetail.description : ""}
             </div>
