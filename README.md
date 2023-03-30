@@ -3,9 +3,9 @@
 ## Repo Layout
 
 `client/`: FrontEnd of the project <br />
-`server/`: BackEnd of the project, sql commands used in backends are mostly in `createTable.sql` and `routes/` <br />
-`SQL/`: All you need on how to create and load our sample database, as well as `test-sample.sql` <br />
-`database/`: Contains the data we use as well as toy data <br />
+`server/`: BackEnd of the project, sql commands used in backends are mostly in `routes/`. Loading database to the project is in `models/index.js`  <br />
+`SQL/`: All you need on how to create and load our sample/production database, as well as `test-sample.sql`, `test-production.sql` and their outputs. We are using `steamdb.json` as our data source <br />
+`database/`: Contains the data we use (toy & production) <br />
 
 ## Project Startup
 
@@ -27,9 +27,15 @@ Then under the project directory, run `./Run.sh` to start up both backend and fr
 ## Project Features that (Currently) Supported
 
 - Posts(Review)
+- Posts Deletion (Must be owner of the post)
 - Comments for the Posts(Review) (Must Login)
-- Login
-- Register
+- Comments Deletion (Must be owner of the comments)
+- Different Games Display Category
+- Game Details Page
+- Profile Page for Users
+- User Login
+- User Register
+- Like/Unlike a Post
 - Password protection
 - JWT Authentication
 
