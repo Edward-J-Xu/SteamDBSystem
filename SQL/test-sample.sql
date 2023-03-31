@@ -59,7 +59,13 @@ group by userA.username;
 */
 select * from game 
 order by name asc
-limit 10
+limit 10;
+
+/* Feature: Display games in alphabetical order
+*/
+select * from own
+where username = 'john123'
+limit 10;
 
 
 
