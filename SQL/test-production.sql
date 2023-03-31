@@ -61,11 +61,18 @@ select * from game
 order by name asc
 limit 10;
 
-/* Feature: Display games in alphabetical order
+/* Feature: Display "owned" games
 */
 select * from own
 where username = 'alexis67'
 limit 10;
+
+/* Feature: Liking a post
+*/
+ select P.id as Post, count(user_id) as Likes
+ from post as P left outer join likes as L on P.id = L.post_id
+ group by P.id
+ limit 10;
 
 
 
