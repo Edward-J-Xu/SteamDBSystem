@@ -1,4 +1,4 @@
-# 348-Project
+# Steam DB System
 
 ## Repo Layout
 
@@ -9,7 +9,9 @@
 
 ## Project Startup
 
-**!! If first time starting this project, please run `npm install` in both frontEnd and backEnd !!**
+**!! If first time starting this project, please run `./Setup.sh` which sets up the dependency, user privilege and schema !!**
+
+<!---
 
 Inside Command line, Login in MySql and do setup. **Only do this when first starting**:
 
@@ -21,8 +23,9 @@ CREATE USER IF NOT EXISTS 'newuser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON steamdb.* TO 'newuser'@'localhost';
 ```
 
+-->
 
-Then under the project directory, run `./Run.sh` to start up both backend and frontend
+Under the project directory, run `./Run.sh` to start up both backend and frontend. The web will pop up for you
 
 ## Project Features that (Currently) Supported
 
@@ -32,7 +35,10 @@ Then under the project directory, run `./Run.sh` to start up both backend and fr
 - Comments Deletion (Must be owner of the comments)
 - Different Games Display Category
 - Game Details Page
+- Game Details Page showing its reviews
 - Profile Page for Users
+- Profile Page displaying owned games
+- Profile Page displaying reviews the user posted
 - User Login
 - User Register
 - Like/Unlike a Post
@@ -40,4 +46,4 @@ Then under the project directory, run `./Run.sh` to start up both backend and fr
 - JWT Authentication
 
 ## To generate sql data
-See the two jypter notebooks in directory `database/`.
+See the two jupyter notebooks in directory `database/`.
