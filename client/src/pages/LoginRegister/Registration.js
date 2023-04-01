@@ -36,6 +36,7 @@ function Registration() {
 
     return (
         <div>
+            <h1>Register Page</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}

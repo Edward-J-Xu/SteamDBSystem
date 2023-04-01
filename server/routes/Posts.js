@@ -42,7 +42,8 @@ router.get("/byuserId/:id", async (req, res) => {
         "select p.*, count(l.post_id) as likeCount " + 
         "from post as p left join likes as l " + 
         "on p.id = l.post_id " + 
-        "where p.username in (select u.username from userA as u where u.id = (?)) group by p.id",
+        "where p.username in (select u.username from userA as u where u.id = (?)) group by p.id " +
+        "ORDER BY p.id DESC",
         [id]
     );
     console.log("User's Posts: ", JSON.stringify(listOfPosts[0]));
@@ -50,8 +51,7 @@ router.get("/byuserId/:id", async (req, res) => {
         "select userA.*, count(*) as post_count " + 
         "from userA join post on userA.username = post.username " + 
         "where userA.id = (?) " + 
-        "group by userA.username " +
-        "ORDER BY post.id DESC",
+        "group by userA.username ",
         [id]
     );
     console.log("User's Info: ", JSON.stringify(userInfo[0]));

@@ -31,6 +31,7 @@ function Login() {
     };
     return (
         <div className="loginContainer">
+            <h1>Login Page</h1>
             <label>Username:</label>
             <input
                 type="text"
