@@ -96,7 +96,7 @@ const Game = () => {
                                     <div
                                         className="body"
                                         onClick={() => {
-                                            history(`/post/${value.id}`);
+                                            history(`/games/posts/${value.id}`);
                                         }}
                                     >
                                         {value.postText}
