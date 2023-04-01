@@ -35,7 +35,6 @@ function Profile() {
                 return res.json()
             })
             .then(data => {
-              console.log("all games: ", data)
               setGameList(data)
             })
         }, []);

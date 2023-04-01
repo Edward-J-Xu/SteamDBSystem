@@ -11,7 +11,8 @@ router.get("/", validateToken, async (req, res) => {
         "select p.*, json_arrayagg(json_object('post_id', l.post_id, 'user_id', l.user_id)) Likes, " + 
         "(select u.id from userA as u where u.username = p.username) as UserId, count(l.post_id) as likeCount " +
         "from post as p left join likes as l on p.id = l.post_id " + 
-        "group by p.id"
+        "group by p.id " +
+        "ORDER BY p.id DESC",
     );
 
     const [likedPosts, likedData] = await db.pool.query(
@@ -49,11 +50,27 @@ router.get("/byuserId/:id", async (req, res) => {
         "select userA.*, count(*) as post_count " + 
         "from userA join post on userA.username = post.username " + 
         "where userA.id = (?) " + 
-        "group by userA.username",
+        "group by userA.username " +
+        "ORDER BY post.id DESC",
         [id]
     );
     console.log("User's Info: ", JSON.stringify(userInfo[0]));
     res.json({listOfPosts: listOfPosts[0], userInfo: userInfo[0]});
+});
+
+router.get("/bygameId/:id", async (req, res) => {
+    const id = req.params.id;
+    const listOfPosts = await db.pool.query(
+        "SELECT p.*, COUNT(l.post_id) as like_count " + 
+        "FROM post p " + 
+        "INNER JOIN game g ON p.gid = g.game_id " + 
+        "LEFT JOIN likes l ON p.id = l.post_id " + 
+        "WHERE g.game_id = (?) " +
+        "GROUP BY p.id",
+        [id]
+    );
+    console.log("Game's Posts: ", JSON.stringify(listOfPosts[0]));
+    res.json({listOfPosts: listOfPosts[0]});
 });
 
 router.post("/", validateToken, async (req, res) => {
