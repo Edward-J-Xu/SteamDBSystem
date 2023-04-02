@@ -1,11 +1,17 @@
 # Steam DB System
 
+## Required 
+
+- MySQL
+- Node.js
+- Jupyter (If you want to generate data yourself)
+
 ## Repo Layout
 
-`client/`: FrontEnd of the project <br />
-`server/`: BackEnd of the project, sql commands used in backends are mostly in `routes/`. Loading database to the project is in `models/index.js`  <br />
-`SQL/`: All you need on how to create and load our sample/production database, as well as `test-sample.sql`, `test-production.sql` and their outputs. We are using `steamdb.json` as our data source <br />
-`database/`: Contains the data we use (toy & production) <br />
+- [client/](https://github.com/Edward-J-Xu/SteamDBSystem/tree/main/client): FrontEnd of the project <br />
+- [server/](https://github.com/Edward-J-Xu/SteamDBSystem/tree/main/server): BackEnd of the project. SQL commands used in backends are mostly in [routes/](https://github.com/Edward-J-Xu/SteamDBSystem/tree/main/server/routes). Loading database to the project is in [models/index.js](https://github.com/Edward-J-Xu/SteamDBSystem/blob/main/server/models/index.js)  <br />
+- [SQL/](https://github.com/Edward-J-Xu/SteamDBSystem/tree/main/SQL): All you need on how to create and load our sample/production database, as well as `test-sample.sql`, `test-production.sql` and their outputs. We are using `steamdb.json` as our data source <br />
+- [database/](https://github.com/Edward-J-Xu/SteamDBSystem/tree/main/database): Contains the data we use (toy & production) <br />
 
 ## Project Startup
 
