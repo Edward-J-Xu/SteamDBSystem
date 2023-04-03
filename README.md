@@ -31,7 +31,7 @@ GRANT ALL PRIVILEGES ON steamdb.* TO 'newuser'@'localhost';
 
 -->
 
-Under the project directory, run `./Run.sh` to start up both backend and frontend. The web will pop up for you
+Under the project directory, run `./Run.sh` to start up both backend and frontend. The web will pop up for you.
 
 ## Project Features that (Currently) Supported
 
@@ -51,5 +51,5 @@ Under the project directory, run `./Run.sh` to start up both backend and fronten
 - Password protection
 - JWT Authentication
 
-## To generate sql data
+## To Generate SQL Data
 See the two jupyter notebooks in directory `database/`.
